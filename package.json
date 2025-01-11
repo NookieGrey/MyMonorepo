@@ -1,11 +1,18 @@
 {
   "name": "mymonorepo",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "workspaces": [
+    "packages/apps/*",
+    "packages/libraries/*"
+  ],
   "scripts": {
-    
+    "dev": "cd packages/apps/home && npm run dev"
   },
   "keywords": [],
   "author": "NookieGrey",
-  "license": "ISC",
-  "description": ""
+  "private": true,
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.4.2"
+  }
 }
