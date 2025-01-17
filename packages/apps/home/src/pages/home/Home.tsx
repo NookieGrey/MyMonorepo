@@ -1,5 +1,5 @@
 import {Button, Typography} from "antd";
-import styles from "./home.module.less";
+import styles from "./home.module.scss";
 
 const { Title, Paragraph, Text } = Typography;
 

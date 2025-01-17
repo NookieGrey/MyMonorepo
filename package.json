@@ -1,5 +1,5 @@
 {
-  "name": "mymonorepo",
+  "name": "sharebook",
   "version": "0.0.2",
   "workspaces": [
     "packages/apps/*",

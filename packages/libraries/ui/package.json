@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "@sharebook/library-ui",
   "private": true,
   "version": "0.0.1",
   "type": "module",
