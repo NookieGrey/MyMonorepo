@@ -6,7 +6,8 @@
     "packages/libraries/*"
   ],
   "scripts": {
-    "dev": "cd packages/apps/home && npm run dev"
+    "dev": "cd packages/apps/home && npm run dev",
+    "storybook": "cd packages/libraries/ui && npm run storybook"
   },
   "keywords": [],
   "author": "NookieGrey",
