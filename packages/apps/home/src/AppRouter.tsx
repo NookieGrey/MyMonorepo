@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router";
 import {Home} from "./pages/home/Home";
 
-export function AppRoter() {
+export function AppRouter() {
     return (
         <BrowserRouter>
             <Routes>

@@ -1,16 +1,12 @@
-import {Button, Typography} from "antd";
-import styles from "./home.module.scss";
-
-const { Title, Paragraph, Text } = Typography;
+// import styles from "./home.module.scss";
+import { HeaderComponent } from './components/Header';
+import { FilterComponent } from './components/Filter';
 
 export function Home() {
   return (
     <div>
-      <Title>Who we are?</Title>
-      <Paragraph>
-        Why are <Text strong>we</Text> here?
-      </Paragraph>
-        <Button className={styles.test}>Press Me One More Time</Button>
+      <HeaderComponent />
+      <FilterComponent />
     </div>
   );
 }

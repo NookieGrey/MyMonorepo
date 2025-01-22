@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 1330px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.buttonDefault {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 11px;
+  cursor: pointer;
+  background: unset;
+  color: #909090;
+  transition: 0.2s all ease;
+}
+.buttonDefault:hover {
+  transition: 0.2s all ease;
+  color: #000000;
+}
+
+.buttonActive {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  height: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 11px;
+  background: var(--ant-color-primary);
+  color: #FFFFFF;
+}
+
+.buttonList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+  width: 159px;
+  height: 40px;
+  border-radius: 11px;
+  cursor: pointer;
+  background: rgba(241, 244, 246, 0.8);
+  color: var(--ant-color-primary);
+}
+
+.svgDefault {
+  transition: 0.2s;
+}
+
+.svgActive {
+  rotate: z 180deg;
+  transition: 0.2s;
+}
+
+.list {
+  position: absolute;
+  list-style: none;
+  cursor: default;
+  background: rgba(241, 244, 246, 0.8);
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  width: 159px;
+  margin: 0;
+  top: 132px;
+  padding: 4px;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+.list li {
+  width: 151px;
+  height: 31px;
+  padding: 6px 10px 6px 10px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.listAcitve {
+  opacity: 100;
+  visibility: visible;
+  transition: 0.2s;
+}
+
+/*# sourceMappingURL=filter.module.css.map */
