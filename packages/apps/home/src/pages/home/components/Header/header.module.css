@@ -17,7 +17,7 @@ header {
   cursor: default;
   display: flex;
   align-items: center;
-  color: #000000;
+  color: var(--ant-color-text-base);
   gap: 8px;
 }
 
@@ -25,24 +25,29 @@ header {
   display: flex;
   justify-content: center;
   gap: 30px;
-  color: #909090;
 }
-.navBar div {
+.navBar .defaultPage {
   cursor: pointer;
+  color: var(--ant-color-text-placeholder);
   transition: 0.2s;
 }
-.navBar div:hover {
-  color: #000000;
+.navBar .defaultPage:hover {
+  color: var(--ant-color-text-base);
 }
-.navBar div:first-child {
-  color: #000000;
+.navBar .activePage {
+  color: var(--ant-color-text-base);
 }
 
 .containerSearch {
+  width: 403px;
+}
+
+.miniContainerSearch {
+  width: 395px;
   display: flex;
   align-items: center;
 }
-.containerSearch svg {
+.miniContainerSearch svg {
   position: relative;
   left: -30px;
   pointer-events: none;
@@ -58,18 +63,12 @@ header {
   border: none;
 }
 .search::placeholder {
-  color: #909090;
+  color: var(--ant-color-text-placeholder);
 }
 
 .avatar {
-  width: 36px;
+  width: 36px !important;
   height: 36px;
-  border-radius: 20px;
-  background: #2A7FFF;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /*# sourceMappingURL=header.module.css.map */

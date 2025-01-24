@@ -21,7 +21,7 @@
 }
 .buttonDefault:hover {
   transition: 0.2s all ease;
-  color: #000000;
+  color: var(--ant-color-text-base);
 }
 
 .buttonActive {
@@ -46,7 +46,7 @@
   height: 40px;
   border-radius: 11px;
   cursor: pointer;
-  background: rgba(241, 244, 246, 0.8);
+  background: var(--ant-color-bg-elevated);
   color: var(--ant-color-primary);
 }
 
@@ -59,35 +59,11 @@
   transition: 0.2s;
 }
 
-.list {
-  position: absolute;
-  list-style: none;
-  cursor: default;
-  background: rgba(241, 244, 246, 0.8);
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15);
+.typeFilter {
   backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  width: 159px;
-  margin: 0;
-  top: 132px;
-  padding: 4px;
-  border-radius: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.2s;
 }
-.list li {
-  width: 151px;
-  height: 31px;
-  padding: 6px 10px 6px 10px;
-  cursor: pointer;
-  color: #000000;
-}
-
-.listAcitve {
-  opacity: 100;
-  visibility: visible;
-  transition: 0.2s;
+.typeFilter ul {
+  margin-top: 2px !important;
 }
 
 /*# sourceMappingURL=filter.module.css.map */

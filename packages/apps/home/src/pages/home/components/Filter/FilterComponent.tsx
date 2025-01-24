@@ -28,7 +28,7 @@ export const FilterComponent = () => {
 					)}
 				</Flex>
 			</div>
-			<Dropdown menu={{ items }} trigger={['click']} onOpenChange={vis => setListState(vis)}>
+			<Dropdown overlayClassName={styles.typeFilter} menu={{ items }} trigger={['click']} onOpenChange={vis => setListState(vis)}>
 				<button className={styles.buttonList}>
 					Отдают
 					<svg className={listState ? styles.svgActive : styles.svgDefault} width="20" height="16" fill="none">
@@ -36,21 +36,6 @@ export const FilterComponent = () => {
 					</svg>
 				</button>
 			</Dropdown>
-
-			{/*Вторая реализация dropDown*/}
-			{/*<div className={styles.buttonList} onClick={() => {*/}
-			{/*	if (listState) setListState(false)*/}
-			{/*	else setListState(true)*/}
-			{/*}}>*/}
-			{/*	Отдают*/}
-			{/*	<svg className={listState ? styles.svgActive : styles.svgDefault} width="20" height="16" fill="none">*/}
-			{/*		<path stroke="#2A7FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.667" d="m5 5.5 5 5 5-5"/>*/}
-			{/*	</svg>*/}
-			{/*	<ul onClick={e => e.stopPropagation()} className={listState ? `${styles.list} ${styles.listAcitve}` : styles.list}>*/}
-			{/*		<li>Обменивают</li>*/}
-			{/*		<li>Все предложения</li>*/}
-			{/*	</ul>*/}
-			{/*</div>*/}
 		</div>
 	);
 };
