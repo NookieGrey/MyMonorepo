@@ -16,10 +16,14 @@ export const antdThemeConfig: ThemeConfig = {
             paddingContentHorizontal: 25,
         },
         Input: {
-          colorBgContainer: '#F1F4F6',
-          controlHeight: 38,
-          paddingInline: 15,
-          borderRadius: 38,
+            colorBgContainer: '#F1F4F6',
+            activeBorderColor: 'rgb(42, 127, 255, 80)',
+            hoverBorderColor: 'transparent',
+            colorBorder: 'transparent',
+            lineWidth: 2,
+            controlHeight: 38,
+            paddingInline: 15,
+            borderRadius: 38,
         },
         Dropdown: {
             paddingBlock: 6,
