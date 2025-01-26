@@ -2,6 +2,7 @@
   "name": "sharebook",
   "version": "0.0.2",
   "workspaces": [
+    "packages/main/*",
     "packages/apps/*",
     "packages/libraries/*"
   ],

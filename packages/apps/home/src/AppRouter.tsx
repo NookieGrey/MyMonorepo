@@ -1,12 +1,15 @@
-import {BrowserRouter, Route, Routes} from "react-router";
-import {Home} from "./pages/home/Home";
+import { BrowserRouter, Route, Routes, StaticRouter } from "react-router";
+import { Home } from "./pages/home/Home";
 
-export function AppRouter() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<Home/>}/>
-            </Routes>
-        </BrowserRouter>
-    )
+const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
+
+export function AppRouter({ url }: { url: string }) {
+  return (
+    <Router location={url}>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/filter/:genre" element={<Home />} />
+      </Routes>
+    </Router>
+  );
 }

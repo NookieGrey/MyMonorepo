@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig({
-  base: "http://localhost:8003",
+  base: "http://localhost:8004",
   plugins: [
     react(),
     createHtmlPlugin({
@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   server: {
     hmr: {
-      port: 3003,
+      port: 3004,
     },
   },
 });
