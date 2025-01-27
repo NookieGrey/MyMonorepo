@@ -1,6 +1,6 @@
 import styles from "../header.module.scss";
 import { Input } from "antd";
-import { SvgSearch } from "./svg/svgSearch.tsx";
+import { SvgSearch } from "../svg/SvgSearch.tsx";
 
 export function Search() {
   return (

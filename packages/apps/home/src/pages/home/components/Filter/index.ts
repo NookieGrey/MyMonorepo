@@ -1,1 +1,1 @@
-export { FilterComponent } from "./ui/FilterComponent.tsx";
+export { FilterComponent } from "./FilterComponent.tsx";

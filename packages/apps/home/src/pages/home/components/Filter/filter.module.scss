@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 
-	width: 1330px;
+	max-width: 1330px;
 	margin: 20px auto 0 auto;
 
 }
@@ -36,13 +36,14 @@
 	color: #FFFFFF;
 }
 
-.buttonList {
+.buttonTypeFilter {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
 	gap: 42px;
-	width: 159px;
+	min-width: 159px;
+	padding: 0 21px 0;
 	height: 40px;
 	border-radius: 11px;
 
@@ -58,7 +59,6 @@
 
 .svgActive {
 	rotate: 180deg;
-	transition: .2s;
 }
 
 .typeFilter {

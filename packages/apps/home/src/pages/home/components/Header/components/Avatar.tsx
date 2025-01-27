@@ -1,6 +1,6 @@
 import styles from "../header.module.scss";
 import { Button } from "antd";
-import { SvgAvatar } from "./svg/svgAvatar.tsx";
+import { SvgAvatar } from "../svg/SvgAvatar.tsx";
 
 export function Avatar() {
   return (

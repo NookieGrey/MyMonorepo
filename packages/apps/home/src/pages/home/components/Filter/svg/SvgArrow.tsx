@@ -1,9 +1,13 @@
-import styles from "../../filter.module.scss";
+import styles from "../filter.module.scss";
 
-export function SvgArrow({ listState }: { listState: boolean }) {
+export function SvgArrow({ showListState }: { showListState: boolean }) {
   return (
     <svg
-      className={listState ? styles.svgActive : styles.svgDefault}
+      className={
+        showListState
+          ? `${styles.svgDefault} ${styles.svgActive}`
+          : styles.svgDefault
+      }
       width="20"
       height="16"
       fill="none"
