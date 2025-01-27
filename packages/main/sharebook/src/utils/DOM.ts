@@ -29,7 +29,7 @@ export function makeScript(el: Node, appName: string, callback: () => void) {
 
   script.onload = callback;
 
-  script.setAttribute("data-app", appName);
+  script.setAttribute("data-script", appName);
 
   return script;
 }

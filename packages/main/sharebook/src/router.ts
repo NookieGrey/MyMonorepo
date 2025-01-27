@@ -34,31 +34,65 @@ async function getApp(appName: string) {
   return response;
 }
 
+let currentTemplateType = "initialize-me";
+
 export async function renderRouteClient(pathname: string) {
   let templateData = await getTemplate(pathname);
 
-  // inner redirect on same template type
-  if (templateData === true) {
-    return true;
-  }
+  // first render or same template
+  if (templateData.type === currentTemplateType) {
+    const renderedDoc = await makeDocument(templateData.template);
 
-  // first render
-  if (templateData === false) {
-    Object.values(definedApps).forEach((obj) => {
-      obj.unmount = obj.init?.();
-      obj.initialized = true;
+    if (!renderedDoc) {
+      console.error("makeRoute - renderedDoc === null");
+      return null;
+    }
+
+    const appNodes = renderedDoc.querySelectorAll("[data-app]");
+
+    let sameTemplate = true;
+    Array.from(appNodes).map(async (element) => {
+      const el = element as HTMLElement;
+
+      const appName = el.getAttribute("data-app");
+
+      if (!appName) {
+        console.error("makeRoute - appName === null");
+        return null;
+      }
+
+      if (!definedApps[appName].initialized) sameTemplate = false;
     });
 
-    return true;
+    if (sameTemplate) {
+      return true;
+    } else {
+      console.log("should be only first init");
+
+      Object.values(definedApps).forEach((app) => {
+        if (!app.init) {
+          console.error("renderRouteClient - 10 - init === null");
+
+          return null;
+        }
+
+        app.unmount = app.init();
+        app.initialized = true;
+      });
+
+      return true;
+    }
   }
+
+  currentTemplateType = templateData.type;
 
   const newParentWrapper = document.createElement("div");
 
   newParentWrapper.innerHTML = templateData.template;
 
-  console.log(newParentWrapper.children[0], definedApps);
-
   const results = await makeRoute(templateData.template);
+
+  const callbacks: (() => void)[] = [];
 
   results?.forEach((result) => {
     if (!result) {
@@ -80,13 +114,17 @@ export async function renderRouteClient(pathname: string) {
       // recreate
       setHTML(newParentWrapper, resultHTML, appName);
 
-      const init = definedApps[appName].init;
-      if (!init) {
-        console.error("renderRouteClient - 6 - init === null");
-        return null;
-      }
+      callbacks.push(() => {
+        const init = definedApps[appName].init;
+        if (!init) {
+          console.error("renderRouteClient - 6 - init === null");
+          return null;
+        }
 
-      init();
+        definedApps[appName].unmount = init();
+
+        definedApps[appName].initialized = true;
+      });
 
       return true;
     }
@@ -95,20 +133,56 @@ export async function renderRouteClient(pathname: string) {
 
     // fresh create
     setHead(appName, resultHead, () => {
-      // todo
+      if (!definedApps[appName] || !definedApps[appName].init) {
+        console.error("setHead callback- definedApps[appName]?.init === null", {
+          definedApps,
+          appName,
+        });
+
+        return null;
+      }
+
+      definedApps[appName].unmount = definedApps[appName].init();
+      definedApps[appName].initialized = true;
     });
   });
 
-  const wrapper = document.querySelector("[data-app]");
+  const wrapper = document.getElementById("sharebook-body");
 
   if (!wrapper) {
     console.error("renderRouteClient - 7 - wrapper === null");
     return null;
   }
 
+  Array.from(wrapper.querySelectorAll("[data-app]")).forEach((element) => {
+    const appName = element.getAttribute("data-app");
+
+    if (element.childNodes.length !== 0) {
+      if (!appName) {
+        console.error("renderRouteClient - 8 - appName === null");
+
+        return null;
+      }
+
+      const unmount = definedApps[appName].unmount;
+
+      if (!unmount) {
+        console.error("renderRouteClient - 9 - unmount === null");
+
+        return null;
+      }
+
+      unmount();
+
+      definedApps[appName].initialized = false;
+    }
+  });
+
   wrapper.innerHTML = "";
 
   wrapper.appendChild(newParentWrapper.children[0]);
+
+  callbacks.forEach((callback) => callback());
 }
 
 function setHTML(
@@ -148,11 +222,6 @@ export async function renderRouteServer(pathname: string) {
   let html = "";
   let head = "";
   const definedApps: Record<string, DefinedApp> = {};
-
-  if (templateData === true || templateData === false) {
-    console.error("renderRouteServer - templateData === boolean");
-    return null;
-  }
 
   html = templateData.template;
 
@@ -248,31 +317,14 @@ export async function makeRoute(template: string) {
   );
 }
 
-let currentTemplateType = "initialize-me";
-
-export async function getTemplate(
-  pathname: string,
-): Promise<{ template: string; type: string } | boolean> {
+export async function getTemplate(pathname: string) {
   let routeConfig = await router.resolve({ pathname });
 
-  console.log({ routeConfig, pathname, currentTemplateType });
-
   if (!routeConfig?.templateType) {
-    console.log("No template type specified", { pathname, routeConfig });
+    console.error("No template type specified", { pathname, routeConfig });
 
     routeConfig = { templateType: "404" };
   }
-
-  if (routeConfig.templateType === currentTemplateType) {
-    // first app init on client
-    if (Object.values(definedApps).some(({ initialized }) => !initialized)) {
-      return false;
-    }
-
-    return true;
-  }
-
-  currentTemplateType = routeConfig.templateType;
 
   let template: { default: string };
 

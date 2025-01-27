@@ -2,6 +2,7 @@ import { hydrateRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
 export const init = () => {
+  console.log(location.href);
   const root = hydrateRoot(
     document.getElementById("home-body") as HTMLElement,
     <App url={location.href} />,
