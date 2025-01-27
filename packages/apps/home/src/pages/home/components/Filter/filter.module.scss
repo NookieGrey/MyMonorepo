@@ -1,0 +1,69 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+
+	max-width: 1330px;
+	margin: 20px auto 0 auto;
+
+}
+
+.buttonGenre {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 40px;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-radius: 11px;
+}
+
+.buttonDefault {
+	cursor: pointer;
+	background: unset;
+	color: #909090;
+	transition: 0.2s all ease;
+
+	&:hover {
+		transition: 0.2s all ease;
+		color: var(--ant-color-text-base);
+	}
+}
+
+.buttonActive {
+	pointer-events: none;
+	background: var(--ant-color-primary);
+	color: #FFFFFF;
+}
+
+.buttonTypeFilter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	gap: 42px;
+	min-width: 159px;
+	padding: 0 21px 0;
+	height: 40px;
+	border-radius: 11px;
+
+	cursor: pointer;
+	border: none;
+	background: var(--ant-color-bg-elevated);
+	color: var(--ant-color-primary);
+}
+
+.svgDefault {
+	transition: .2s;
+}
+
+.svgActive {
+	rotate: 180deg;
+}
+
+.typeFilter {
+	backdrop-filter: blur(50px);
+	ul {
+		margin-top: 2px !important;
+	}
+}

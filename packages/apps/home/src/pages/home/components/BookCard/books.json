@@ -1,0 +1,44 @@
+{
+	"data": [
+		{
+			"path": "",
+			"title": "Старик и море, Зеленые холмы Африки",
+			"author": "Эрнест Хэмингуэй",
+			"location": "Санкт-Петербург, Московский район",
+			"transferType": "exchange",
+			"gene": "roman"
+		},
+		{
+			"path": "",
+			"title": "Тетушка Хулия и Писалка",
+			"author": "Марио Варгос Льосе",
+			"location": "Санкт-Петербург, Озерки",
+			"transferType": "give",
+			"gene": "art"
+		},
+		{
+			"path": "",
+			"title": "Три товарища",
+			"author": "Эрих Мария Ремарк",
+			"location": "Санкт-Петербург, Кировский район",
+			"transferType": "give",
+			"gene": "art"
+		},
+		{
+			"path": "",
+			"title": "Краткие ответы на большие вопросы",
+			"author": "Стивен Хокинг",
+			"location": "Санкт-Петербург, Невский район",
+			"transferType": "exchange",
+			"gene": "scientific"
+		},
+		{
+			"path": "",
+			"title": "Интервальное голодание",
+			"author": "Джейсон Фанг",
+			"location": "Санкт-Петербург, Кировский район",
+			"transferType": "give",
+			"gene": "scientific"
+		}
+	]
+}
