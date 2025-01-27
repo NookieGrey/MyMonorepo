@@ -1,132 +1,276 @@
 import UniversalRouter from "universal-router";
 import { routes } from "./routes.ts";
+import { makeDocument, makeScript } from "./utils/DOM.ts";
 
 const router = new UniversalRouter(routes);
 
-async function renderRoute(pathname: string) {
-  let rendered = await makeRoute(pathname);
+type DefinedApp = {
+  appName: string;
+  initialized: boolean;
+  init?(): () => void;
+  unmount?(): void;
+};
 
-  if (rendered === null) return;
+let definedApps: Record<string, DefinedApp> = {};
 
-  const parser = new DOMParser();
+async function getApp(appName: string) {
+  let response: Response;
 
-  const doc = parser.parseFromString(rendered, "text/html");
-
-  const errorNode = doc.querySelector("parsererror");
-  if (errorNode) {
-    console.error(doc, rendered, "error while parsing");
-    return;
+  switch (appName) {
+    case "header":
+      response = await fetch("http://localhost:8004/");
+      break;
+    case "home":
+      response = await fetch("http://localhost:8003/");
+      break;
+    case "chat":
+      response = await fetch("http://localhost:8006/");
+      break;
+    default:
+      console.error(`getApp - ${appName}`);
+      return null;
   }
 
-  const apps = await Promise.all(
-    Array.from(doc.querySelectorAll("[data-app]")).map(async (el) => {
+  return response;
+}
+
+export async function renderRouteClient(pathname: string) {
+  let templateData = await getTemplate(pathname);
+
+  // inner redirect on same template type
+  if (templateData === true) {
+    return true;
+  }
+
+  // first render
+  if (templateData === false) {
+    Object.values(definedApps).forEach((obj) => {
+      obj.unmount = obj.init?.();
+      obj.initialized = true;
+    });
+
+    return true;
+  }
+
+  const newParentWrapper = document.createElement("div");
+
+  newParentWrapper.innerHTML = templateData.template;
+
+  console.log(newParentWrapper.children[0], definedApps);
+
+  const results = await makeRoute(templateData.template);
+
+  results?.forEach((result) => {
+    if (!result) {
+      console.error("renderRouteClient - 2 - result === null");
+      return null;
+    }
+
+    const { appName, resultHTML, resultHead } = result;
+
+    if (definedApps[appName]) {
+      // move
+      if (definedApps[appName].initialized) {
+        const app = document.getElementById(`${appName}-body`);
+
+        setHTML(newParentWrapper, app, appName);
+        return true;
+      }
+
+      // recreate
+      setHTML(newParentWrapper, resultHTML, appName);
+
+      const init = definedApps[appName].init;
+      if (!init) {
+        console.error("renderRouteClient - 6 - init === null");
+        return null;
+      }
+
+      init();
+
+      return true;
+    }
+
+    setHTML(newParentWrapper, resultHTML, appName);
+
+    // fresh create
+    setHead(appName, resultHead, () => {
+      // todo
+    });
+  });
+
+  const wrapper = document.querySelector("[data-app]");
+
+  if (!wrapper) {
+    console.error("renderRouteClient - 7 - wrapper === null");
+    return null;
+  }
+
+  wrapper.innerHTML = "";
+
+  wrapper.appendChild(newParentWrapper.children[0]);
+}
+
+function setHTML(
+  newParentWrapper: HTMLElement,
+  app: HTMLElement | null,
+  appName: string,
+) {
+  if (app === null) {
+    console.error("renderRouteClient - 3 - app === null");
+    return null;
+  }
+
+  const dataApp = newParentWrapper.querySelector(`[data-app="${appName}"]`);
+
+  if (!dataApp) {
+    console.error("renderRouteClient - 4 - dataApp === null");
+    return null;
+  }
+
+  dataApp.appendChild(app);
+}
+
+function setHead(appName: string, resultHead: Node[], init: () => void) {
+  const appHead = document.head as HTMLElement;
+
+  resultHead.forEach((el) => {
+    if (el.nodeName === "SCRIPT") {
+      el = makeScript(el, appName, init);
+    }
+
+    appHead.appendChild(el);
+  });
+}
+
+export async function renderRouteServer(pathname: string) {
+  let templateData = await getTemplate(pathname);
+  let html = "";
+  let head = "";
+  const definedApps: Record<string, DefinedApp> = {};
+
+  if (templateData === true || templateData === false) {
+    console.error("renderRouteServer - templateData === boolean");
+    return null;
+  }
+
+  html = templateData.template;
+
+  const results = await makeRoute(templateData.template);
+
+  results?.forEach((result) => {
+    if (!result) {
+      console.error("renderRouteServer - result === null");
+      return null;
+    }
+
+    const { appName, resultHTML, resultHead } = result;
+
+    if (!resultHTML) {
+      console.error("renderRouteServer - resultHTML === null");
+      return null;
+    }
+
+    html = html.replace(
+      `<div data-app="${appName}"></div>`,
+      `<div data-app="${appName}">${resultHTML.outerHTML}</div>`,
+    );
+
+    head += resultHead.map((el) => (el as HTMLElement).outerHTML).join("");
+
+    definedApps[appName] = { appName, initialized: false };
+  });
+
+  head += `<script>window.currentTemplateType = "${templateData.type}";</script>`;
+
+  return { html, head };
+}
+
+export async function makeRoute(template: string) {
+  const renderedDoc = await makeDocument(template);
+
+  if (!renderedDoc) {
+    console.error("makeRoute - renderedDoc === null");
+    return null;
+  }
+
+  const appNodes = renderedDoc.querySelectorAll("[data-app]");
+
+  return await Promise.all(
+    Array.from(appNodes).map(async (element) => {
+      const el = element as HTMLElement;
+
       const appName = el.getAttribute("data-app");
 
-      let response: Response;
+      if (!appName) {
+        console.error("makeRoute - appName === null");
+        return null;
+      }
 
-      switch (appName) {
-        case "header":
-          response = await fetch("http://localhost:8004/");
-          break;
-        case "home":
-          response = await fetch("http://localhost:8003/");
-          break;
-        default:
-          console.error(appName);
-          return;
+      const response = await getApp(appName);
+
+      if (!response) {
+        console.error("makeRoute - response === null");
+        return null;
       }
 
       if (!response.ok) {
         console.error(response.statusText);
-        return;
+        return null;
       }
 
       const html = await response.text();
-
-      const parser = new DOMParser();
-
-      const doc = parser.parseFromString(html, "text/html");
-
-      const errorNode = doc.querySelector("parsererror");
-      if (errorNode) {
-        console.error(doc, rendered, "error while parsing");
-        return;
+      const doc = await makeDocument(html);
+      if (!doc) {
+        console.error("makeRoute - doc === null");
+        return null;
       }
 
-      const appHTML = doc.getElementById(`${appName}-body`);
+      const resultHTML = doc.getElementById(`${appName}-body`);
+
       const head = doc.getElementsByTagName(`head`)[0];
-      const headArray = [];
 
       let insert = false;
-      for (let i = 0; i < head.childNodes.length; i++) {
-        const el = head.childNodes[i];
-        if (insert) {
-          if (el.nodeName === "SCRIPT") {
-            const script = document.createElement("script");
+      const resultHead = Array.from(head.childNodes).filter((element) => {
+        const el = element as Node;
 
-            // @ts-ignore
-            script.src = el.attributes.src.nodeValue;
-            // При необходимости можно указать тип модуля:
-            script.type = "module";
-
-            script.setAttribute("data-app", appName);
-
-            // Если нужно отследить, когда скрипт загрузился, вешаем обработчик onload:
-            script.onload = () => {
-              console.log("worked");
-            };
-
-            headArray.push(script);
-
-            continue;
-          }
-          headArray.push(el);
-        }
         if (el.nodeType === 8 && el.textContent === "inserted-content-start") {
-          insert = true;
+          return (insert = true);
         }
-      }
 
-      return { appHTML, headArray, appName };
+        if (!insert) return false;
+
+        return el;
+      });
+
+      return { appName, resultHTML, resultHead };
     }),
   );
-
-  apps.forEach((app) => {
-    if (!app) return;
-    const { appHTML, appName } = app;
-
-    rendered =
-      rendered?.replace(
-        `<div data-app="${appName}"></div>`,
-        appHTML?.outerHTML ?? "",
-      ) ?? "";
-  });
-
-  const app = document.getElementById("sharebook-body")!;
-  app.innerHTML = rendered;
-
-  const head = document.getElementsByTagName("head")[0];
-  apps.forEach((app) => {
-    if (!app) return;
-
-    const { headArray } = app;
-
-    headArray.forEach((el) => {
-      head.appendChild(el);
-    });
-  });
 }
 
 let currentTemplateType = "initialize-me";
 
-export async function makeRoute(pathname: string) {
-  const routeConfig = await router.resolve({ pathname });
+export async function getTemplate(
+  pathname: string,
+): Promise<{ template: string; type: string } | boolean> {
+  let routeConfig = await router.resolve({ pathname });
+
+  console.log({ routeConfig, pathname, currentTemplateType });
 
   if (!routeConfig?.templateType) {
-    throw new Error("No template type specified");
+    console.log("No template type specified", { pathname, routeConfig });
+
+    routeConfig = { templateType: "404" };
   }
 
-  if (routeConfig.templateType === currentTemplateType) return null;
+  if (routeConfig.templateType === currentTemplateType) {
+    // first app init on client
+    if (Object.values(definedApps).some(({ initialized }) => !initialized)) {
+      return false;
+    }
+
+    return true;
+  }
 
   currentTemplateType = routeConfig.templateType;
 
@@ -143,14 +287,14 @@ export async function makeRoute(pathname: string) {
       template = await import("./templates/404.html?raw");
   }
 
-  return template.default;
+  return { template: template.default, type: routeConfig.templateType };
 }
 
 async function navigateTo(pathname: string) {
   // Меняем URL в адресной строке без перезагрузки страницы
   window.history.pushState({}, "", pathname);
   // Рендерим соответствующий контент
-  await renderRoute(pathname);
+  await renderRouteClient(pathname);
 }
 
 export function addEventListeners() {
@@ -173,12 +317,15 @@ export function addEventListeners() {
   // 4. Слушаем событие popstate (нажатие назад/вперёд в браузере)
   window.addEventListener("popstate", async () => {
     // При popstate, текущий путь хранится в location.pathname
-    await renderRoute(window.location.pathname);
+    await renderRouteClient(window.location.pathname);
   });
 
   // 5. При первой загрузке страницы рендерим контент
   //    на основе текущего location.pathname
   window.addEventListener("DOMContentLoaded", async () => {
-    await renderRoute(window.location.pathname);
+    definedApps = window.definedApps;
+    currentTemplateType = window.currentTemplateType;
+
+    await renderRouteClient(window.location.pathname);
   });
 }

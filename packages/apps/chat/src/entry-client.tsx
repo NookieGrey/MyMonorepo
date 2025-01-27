@@ -3,7 +3,7 @@ import { App } from "./App.tsx";
 
 export const init = () => {
   const root = hydrateRoot(
-    document.getElementById("home-body") as HTMLElement,
+    document.getElementById("chat-body") as HTMLElement,
     <App url={location.href} />,
   );
 
@@ -11,11 +11,11 @@ export const init = () => {
 };
 
 if (window.definedApps) {
-  window.definedApps.home = { appName: "home", init, initialized: false };
+  window.definedApps.chat = { appName: "chat", init, initialized: false };
 } else {
-  console.error("window.definedApps is not defined at [home].");
+  console.error("window.definedApps is not defined at [chat].");
 }
 
-if (location.port === "8003") {
+if (location.port === "8006") {
   init();
 }

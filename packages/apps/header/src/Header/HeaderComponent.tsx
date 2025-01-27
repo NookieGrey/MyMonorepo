@@ -1,7 +1,7 @@
 import styles from "./header.module.scss";
 import { Button, Input } from "antd";
 
-const pages: string[] = ["Главная", "Избранное", "Чаты"];
+const pages: string[] = ["Главная", "Избранное", "chat"];
 
 export const HeaderComponent = () => {
   return (
