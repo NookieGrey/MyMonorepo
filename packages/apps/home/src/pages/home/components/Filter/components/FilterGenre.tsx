@@ -8,13 +8,13 @@ interface Genre {
 }
 
 const genres: Genre[] = [
-  { title: "Все", url: "AllOfThem" },
-  { title: "От ShareBook", url: "FromShareBook" },
-  { title: "Детективы", url: "Detectives" },
-  { title: "Романы", url: "Novels" },
-  { title: "Научные", url: "Scientific" },
-  { title: "Исскуство", url: "Art" },
-  { title: "Учебные", url: "Tutorials" },
+  { title: "Все", url: "/" },
+  { title: "От ShareBook", url: "/filter/FromShareBook" },
+  { title: "Детективы", url: "/filter/Detectives" },
+  { title: "Романы", url: "/filter/Novels" },
+  { title: "Научные", url: "/filter/Scientific" },
+  { title: "Исскуство", url: "/filter/Art" },
+  { title: "Учебные", url: "/filter/Tutorials" },
 ];
 
 export function FilterGenre() {
@@ -24,7 +24,7 @@ export function FilterGenre() {
         {genres.map((genre, idx) => (
           <NavLink
             key={idx}
-            to={genre.url == "AllOfThem" ? "/" : `/filter/${genre.url}`}
+            to={genre.url}
             className={(isActive) =>
               isActive.isActive
                 ? `${styles.buttonGenre} ${styles.buttonActive}`

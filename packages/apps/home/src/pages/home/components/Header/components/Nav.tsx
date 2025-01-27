@@ -7,9 +7,9 @@ interface MainMenuItem {
 }
 
 const mainMenuItems: MainMenuItem[] = [
-  { title: "Главная", url: "Main" },
-  { title: "Избранное", url: "Favourites" },
-  { title: "Чаты", url: "Chats" },
+  { title: "Главная", url: "/" },
+  { title: "Избранное", url: "/Favourites" },
+  { title: "Чаты", url: "/Chats" },
 ];
 
 export function Nav() {
@@ -19,7 +19,7 @@ export function Nav() {
         {mainMenuItems.map((page, idx) => (
           <li key={idx}>
             <NavLink
-              to={page.title == "Главная" ? "/" : `/${page.url}`}
+              to={page.url}
               className={(isActive) =>
                 isActive.isActive ? styles.activeMenuItem : styles.menuItem
               }
