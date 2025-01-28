@@ -10,11 +10,11 @@ export const routes = [
     action: (params: RouterContext) => ({ ...params, templateType: "home" }),
   },
   {
-    path: "chat",
+    path: "Chats",
     action: (params: RouterContext) => ({ ...params, templateType: "chat" }),
   },
   {
-    path: "/chat",
+    path: "/Chats",
     action: (params: RouterContext) => ({ ...params, templateType: "chat" }),
   },
   {

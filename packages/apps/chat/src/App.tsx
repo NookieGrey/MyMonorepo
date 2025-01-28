@@ -5,7 +5,7 @@ import "antd/dist/reset.css";
 import type Entity from "@ant-design/cssinjs/es/Cache";
 import { StyleProvider } from "@ant-design/cssinjs";
 
-export function App({ cache }: { cache?: Entity; url: string }) {
+export function App({ cache }: { cache?: Entity; location: string }) {
   return (
     <StrictMode>
       <StyleProvider cache={cache}>

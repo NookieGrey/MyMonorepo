@@ -7,24 +7,24 @@ const router = new UniversalRouter(routes);
 type DefinedApp = {
   appName: string;
   initialized: boolean;
-  init?(): () => void;
+  init?(location: string): () => void;
   unmount?(): void;
 };
 
 let definedApps: Record<string, DefinedApp> = {};
 
-async function getApp(appName: string) {
+async function getApp(appName: string, pathname: string) {
   let response: Response;
 
   switch (appName) {
     case "header":
-      response = await fetch("http://localhost:8004/");
+      response = await fetch(`http://localhost:8004${pathname}`);
       break;
     case "home":
-      response = await fetch("http://localhost:8003/");
+      response = await fetch(`http://localhost:8003${pathname}`);
       break;
     case "chat":
-      response = await fetch("http://localhost:8006/");
+      response = await fetch(`http://localhost:8006${pathname}`);
       break;
     default:
       console.error(`getApp - ${appName}`);
@@ -76,7 +76,7 @@ export async function renderRouteClient(pathname: string) {
           return null;
         }
 
-        app.unmount = app.init();
+        app.unmount = app.init(location.href);
         app.initialized = true;
       });
 
@@ -90,7 +90,7 @@ export async function renderRouteClient(pathname: string) {
 
   newParentWrapper.innerHTML = templateData.template;
 
-  const results = await makeRoute(templateData.template);
+  const results = await makeRoute(templateData.template, pathname);
 
   const callbacks: (() => void)[] = [];
 
@@ -121,7 +121,7 @@ export async function renderRouteClient(pathname: string) {
           return null;
         }
 
-        definedApps[appName].unmount = init();
+        definedApps[appName].unmount = init(location.href);
 
         definedApps[appName].initialized = true;
       });
@@ -142,7 +142,7 @@ export async function renderRouteClient(pathname: string) {
         return null;
       }
 
-      definedApps[appName].unmount = definedApps[appName].init();
+      definedApps[appName].unmount = definedApps[appName].init(location.href);
       definedApps[appName].initialized = true;
     });
   });
@@ -225,7 +225,7 @@ export async function renderRouteServer(pathname: string) {
 
   html = templateData.template;
 
-  const results = await makeRoute(templateData.template);
+  const results = await makeRoute(templateData.template, pathname);
 
   results?.forEach((result) => {
     if (!result) {
@@ -255,7 +255,7 @@ export async function renderRouteServer(pathname: string) {
   return { html, head };
 }
 
-export async function makeRoute(template: string) {
+export async function makeRoute(template: string, pathname: string) {
   const renderedDoc = await makeDocument(template);
 
   if (!renderedDoc) {
@@ -276,7 +276,7 @@ export async function makeRoute(template: string) {
         return null;
       }
 
-      const response = await getApp(appName);
+      const response = await getApp(appName, pathname);
 
       if (!response) {
         console.error("makeRoute - response === null");
@@ -344,9 +344,13 @@ export async function getTemplate(pathname: string) {
 
 async function navigateTo(pathname: string) {
   // Меняем URL в адресной строке без перезагрузки страницы
-  window.history.pushState({}, "", pathname);
+  window.history.pushState({ idx: 0, key: "default" }, "", pathname);
+
+  // хакаем React Router
+  window.dispatchEvent(new Event("popstate"));
+
   // Рендерим соответствующий контент
-  await renderRouteClient(pathname);
+  // await renderRouteClient(pathname);
 }
 
 export function addEventListeners() {

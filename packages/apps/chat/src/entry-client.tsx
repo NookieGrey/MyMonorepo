@@ -1,10 +1,10 @@
 import { hydrateRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-export const init = () => {
+export const init = (location: string) => {
   const root = hydrateRoot(
     document.getElementById("chat-body") as HTMLElement,
-    <App url={location.href} />,
+    <App location={location} />,
   );
 
   return () => root.unmount();
@@ -17,5 +17,5 @@ if (window.definedApps) {
 }
 
 if (location.port === "8006") {
-  init();
+  init(location.href);
 }

@@ -38,7 +38,7 @@ app.use(cors());
 // Serve HTML
 app.use("*all", async (req, res) => {
   try {
-    const url = req.originalUrl.replace(base, "");
+    const url = req.originalUrl.replace(base, "/");
 
     /** @type {string} */
     let template;

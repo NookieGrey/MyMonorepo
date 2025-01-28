@@ -1,17 +1,13 @@
 import { hydrateRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 
-export const init = () => {
+export const init = (location: string) => {
   const root = hydrateRoot(
     document.getElementById("header-body") as HTMLElement,
-    <App />,
+    <App location={location} />,
   );
 
-  console.log("header initialized");
-
   return () => {
-    console.log("header unmounted");
-
     root.unmount();
   };
 };
@@ -23,5 +19,5 @@ if (window.definedApps) {
 }
 
 if (location.port === "8004") {
-  init();
+  init(location.href);
 }

@@ -7,9 +7,12 @@
   "scripts": {
     "dev": "node server",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.ts --outDir dist/server",
-    "preview": "cross-env NODE_ENV=production node server"
+    "build:client": "cross-env NODE_ENV=production vite build --outDir dist/client",
+    "build:server": "cross-env NODE_ENV=production vite build --ssr src/entry-server.ts --outDir dist/server",
+    "preview": "cross-env NODE_ENV=production node server",
+    "start": "npm run build && npm run preview",
+    "lint": "eslint . --fix",
+    "prettier": "prettier ."
   },
   "dependencies": {
     "compression": "^1.7.5",

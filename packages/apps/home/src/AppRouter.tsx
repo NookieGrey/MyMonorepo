@@ -3,9 +3,9 @@ import { Home } from "./pages/home/Home";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
-export function AppRouter({ url }: { url: string }) {
+export function AppRouter({ location }: { location: string }) {
   return (
-    <Router location={url}>
+    <Router location={location}>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/filter/:genre" element={<Home />} />

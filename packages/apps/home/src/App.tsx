@@ -6,13 +6,13 @@ import type Entity from "@ant-design/cssinjs/es/Cache";
 import { StyleProvider } from "@ant-design/cssinjs";
 import { AppRouter } from "./AppRouter.tsx";
 
-export function App({ cache, url }: { cache?: Entity; url: string }) {
+export function App({ cache, location }: { cache?: Entity; location: string }) {
   return (
     <StrictMode>
       <StyleProvider cache={cache}>
         <ConfigProvider theme={antdThemeConfig}>
           <AntDApp>
-            <AppRouter url={url} />
+            <AppRouter location={location} />
           </AntDApp>
         </ConfigProvider>
       </StyleProvider>

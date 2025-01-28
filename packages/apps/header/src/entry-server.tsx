@@ -3,10 +3,10 @@ import { App } from "./App";
 import { createCache, extractStyle } from "@ant-design/cssinjs";
 import type Entity from "@ant-design/cssinjs/es/Cache";
 
-export function render() {
+export function render(location: string) {
   const cache: Entity = createCache();
 
-  const html = renderToString(<App cache={cache} />);
+  const html = renderToString(<App cache={cache} location={location} />);
 
   const styleText = extractStyle(cache);
 
