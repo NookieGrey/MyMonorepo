@@ -2,20 +2,23 @@
 	display: flex;
 	justify-content: space-between;
 
-	width: 1330px;
-	margin: auto;
-	margin-top: 20px;
+	max-width: 1330px;
+	margin: 20px auto 0 auto;
+
 }
 
-.buttonDefault {
+.buttonGenre {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
 	height: 40px;
 	padding-left: 25px;
 	padding-right: 25px;
 	border-radius: 11px;
+}
 
+.buttonDefault {
 	cursor: pointer;
 	background: unset;
 	color: #909090;
@@ -28,31 +31,24 @@
 }
 
 .buttonActive {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	pointer-events: none;
-
-	height: 40px;
-	padding-left: 25px;
-	padding-right: 25px;
-	border-radius: 11px;
-
 	background: var(--ant-color-primary);
 	color: #FFFFFF;
 }
 
-.buttonList {
+.buttonTypeFilter {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 42px;
 
-	width: 159px;
+	gap: 42px;
+	min-width: 159px;
+	padding: 0 21px 0;
 	height: 40px;
 	border-radius: 11px;
 
 	cursor: pointer;
+	border: none;
 	background: var(--ant-color-bg-elevated);
 	color: var(--ant-color-primary);
 }
@@ -62,8 +58,7 @@
 }
 
 .svgActive {
-	rotate: z 180deg;
-	transition: .2s;
+	rotate: 180deg;
 }
 
 .typeFilter {
