@@ -1,16 +1,18 @@
-import {BrowserRouter, Route, Routes} from "react-router";
+import {BrowserRouter, Route, Routes, StaticRouter} from "react-router";
 import {Home} from "./pages/home/Home.tsx";
 import {HeaderComponent} from "./components/Header";
 
-export function AppRouter() {
+const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
+
+export function AppRouter({location}: { location: string }) {
   return (
-    <BrowserRouter>
+    <Router location={location}>
       <HeaderComponent/>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path="/filter/:genre" element={<Home/>}/>
         <Route path={"*"} element={<div>404 page not found</div>}/>
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
