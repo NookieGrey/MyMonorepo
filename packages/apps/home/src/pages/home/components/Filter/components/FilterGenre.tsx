@@ -1,4 +1,3 @@
-import { Flex } from "antd";
 import { NavLink } from "react-router";
 import styles from "../filter.module.scss";
 
@@ -19,22 +18,20 @@ const genres: Genre[] = [
 
 export function FilterGenre() {
   return (
-    <div>
-      <Flex>
-        {genres.map((genre, idx) => (
-          <NavLink
-            key={idx}
-            to={genre.url}
-            className={(isActive) =>
-              isActive.isActive
-                ? `${styles.buttonGenre} ${styles.buttonActive}`
-                : `${styles.buttonGenre} ${styles.buttonDefault}`
-            }
-          >
-            {genre.title}
-          </NavLink>
-        ))}
-      </Flex>
+    <div className={styles.containerGenres}>
+      {genres.map((genre, idx) => (
+        <NavLink
+          key={idx}
+          to={genre.url}
+          className={(isActive) =>
+            isActive.isActive
+              ? `${styles.buttonGenre} ${styles.buttonActive}`
+              : `${styles.buttonGenre} ${styles.buttonDefault}`
+          }
+        >
+          {genre.title}
+        </NavLink>
+      ))}
     </div>
   );
 }

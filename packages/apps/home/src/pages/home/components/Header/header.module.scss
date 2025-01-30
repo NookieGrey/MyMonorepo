@@ -12,14 +12,14 @@
 	align-items: center;
 	flex: 1;
 	padding: 0 35px 0 35px;
+
+	font-family: 'Onest-Regular', sans-serif;
+	font-size: 15px;
 }
 
 .logo {
+	margin-bottom: 2px;
 	line-height: 0;
-}
-
-.blank {
-	flex: 1;
 }
 
 .navBar {
@@ -41,8 +41,13 @@
 	}
 
 	.activeMenuItem {
+		font-family: 'Onest-Medium', sans-serif;
 		color: var(--ant-color-text-base);
 	}
+}
+
+.blank {
+	flex: 1;
 }
 
 .containerSearch {

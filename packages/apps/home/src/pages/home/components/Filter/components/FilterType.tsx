@@ -11,7 +11,7 @@ interface Type {
 const types: Type[] = [
   { label: "Обменивают", key: "0" },
   { label: "Отдают", key: "1" },
-  { label: "Все предложения", key: "2" },
+  { label: "Все варианты", key: "2" },
 ];
 
 export function FilterType() {
