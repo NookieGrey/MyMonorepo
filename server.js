@@ -18,9 +18,9 @@ const app = express();
 /** @type {import('vite').ViteDevServer | undefined} */
 let vite;
 if (!isProduction) {
-  const {createServer} = await import("vite");
+  const { createServer } = await import("vite");
   vite = await createServer({
-    server: {middlewareMode: true},
+    server: { middlewareMode: true },
     appType: "custom",
     base,
   });
@@ -29,7 +29,7 @@ if (!isProduction) {
   const compression = (await import("compression")).default;
   const sirv = (await import("sirv")).default;
   app.use(compression());
-  app.use(base, sirv("./dist/client", {extensions: []}));
+  app.use(base, sirv("./dist/client", { extensions: [] }));
 }
 
 // Serve HTML
@@ -57,7 +57,7 @@ app.use("*", async (req, res) => {
       .replace(`<!--home-head-->`, rendered.head ?? "")
       .replace(`<!--home-body-->`, rendered.body ?? "");
 
-    res.status(200).set({"Content-Type": "text/html"}).send(html);
+    res.status(200).set({ "Content-Type": "text/html" }).send(html);
   } catch (e) {
     vite?.ssrFixStacktrace(e);
     console.log(e.stack);
@@ -66,6 +66,9 @@ app.use("*", async (req, res) => {
 });
 
 // Start http server
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
+
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
