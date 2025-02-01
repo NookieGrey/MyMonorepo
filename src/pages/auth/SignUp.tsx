@@ -1,13 +1,13 @@
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "./auth.module.scss";
-import { useRegistrationMutation } from "./auth.ts";
 import { useNavigate } from "react-router";
+import { useRegisterUserMutation } from "../../api/sharebookApi.ts";
 
 export function SignUp() {
   const navigate = useNavigate();
 
-  const [register, { isLoading }] = useRegistrationMutation();
+  const [register, { isLoading }] = useRegisterUserMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
     console.log("Success:", values);

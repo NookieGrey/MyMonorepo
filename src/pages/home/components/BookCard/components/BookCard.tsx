@@ -1,26 +1,25 @@
 import styles from "../bookCard.module.scss";
 import { Card } from "antd";
 import img1 from "../img/Image1.png";
-import img2 from "../img/Image2.png";
+import { BookDto } from "../../../../../api/sharebookApi.ts";
 
-interface Book {
-  id: string;
-  path?: string;
-  title: string;
-  author: string;
-  location: string;
-  transferType: string;
-  gene: string;
-}
+export function BookCard({ book }: { book: BookDto }) {
+  // @ts-expect-error WIP
+  const attachment = book.attachment;
 
-export function BookCard({ book }: { book: Book }) {
   return (
     <>
       <Card
-        key={book.id}
         cover={
           <div className={styles.containerImage}>
-            <img alt={book.title} src={img2 || img1} />
+            <img
+              alt={book.title}
+              src={
+                attachment
+                  ? `data:image/${attachment.expansion?.slice(1) ?? "jpg"};base64,${attachment?.data}`
+                  : img1
+              }
+            />
           </div>
         }
         hoverable
@@ -31,7 +30,7 @@ export function BookCard({ book }: { book: Book }) {
             <div className={styles.title}>{book.title}</div>
             <a className={styles.author}>{book.author}</a>
           </div>
-          <p className={styles.location}>{book.location}</p>
+          <p className={styles.location}>{book.genre}</p>
         </div>
       </Card>
     </>

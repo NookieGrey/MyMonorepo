@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { authApi } from "./pages/auth/auth.ts";
 import { authReducer } from "./pages/auth/authSlice.tsx";
+import { sharebookApi } from "./api/sharebookApi.ts";
 
 export const store = configureStore({
   reducer: {
-    [authApi.reducerPath]: authApi.reducer,
+    [sharebookApi.reducerPath]: sharebookApi.reducer,
     auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(authApi.middleware),
+    getDefaultMiddleware().concat(sharebookApi.middleware),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

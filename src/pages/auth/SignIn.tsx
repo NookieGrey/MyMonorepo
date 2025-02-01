@@ -2,17 +2,17 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "./auth.module.scss";
 import { useNavigate } from "react-router";
-import { useLoginMutation } from "./auth.ts";
+import { useAuthMutation } from "../../api/sharebookApi.ts";
 
 export function SignIn() {
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading }] = useAuthMutation();
 
   const onFinish: FormProps["onFinish"] = async (values) => {
     console.log("Success:", values);
     try {
-      await login(values).unwrap();
+      await login({ loginRequest: values }).unwrap();
       // Being that the result is handled in extraReducers in authSlice,
       // we know that we're authenticated after this, so the user
       // and token will be present in the store

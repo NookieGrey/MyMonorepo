@@ -1,15 +1,15 @@
 import styles from "../bookCard.module.scss";
-import data from "../books.json";
 import { BookCard } from "./BookCard.tsx";
+import { BookDto, BooksApiResponse } from "../../../../../api/sharebookApi.ts";
 
-const books = data.data;
+interface Props {
+  books?: BooksApiResponse;
+}
 
-export function BookCardComponent() {
+export function BookCardComponent({ books }: Props) {
   return (
     <div className={styles.container}>
-      {books.map((book) => (
-        <BookCard book={book} />
-      ))}
+      {(books as unknown as BookDto[])?.map((book) => <BookCard book={book} />)}
     </div>
   );
 }
