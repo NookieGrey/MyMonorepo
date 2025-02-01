@@ -11,7 +11,8 @@
     "preview": "cross-env NODE_ENV=production node server",
     "start": "npm run build && npm run preview",
     "lint": "eslint . --fix",
-    "prettier": "prettier . --write"
+    "prettier": "prettier . --write",
+    "apigen": "node ./node_modules/@rtk-query/codegen-openapi/lib/bin/cli.mjs ./openapi-config.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@rtk-query/codegen-openapi": "^2.0.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
