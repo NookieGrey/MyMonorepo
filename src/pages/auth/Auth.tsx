@@ -5,7 +5,7 @@ import { SignIn } from "./SignIn.tsx";
 import { SignUp } from "./SignUp.tsx";
 
 export function Auth() {
-  const [isSignIn, setSignIn] = useState(true);
+  const [isSignIn, setSignIn] = useState(false);
 
   return (
     <div className={styles.wrapper}>
