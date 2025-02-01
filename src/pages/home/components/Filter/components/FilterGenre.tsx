@@ -4,16 +4,17 @@ import styles from "../filter.module.scss";
 interface Genre {
   title: string;
   url: string;
+  id: string;
 }
 
 const genres: Genre[] = [
-  { title: "Все", url: "/" },
-  { title: "От ShareBook", url: "/filter/FromShareBook" },
-  { title: "Детективы", url: "/filter/Detectives" },
-  { title: "Романы", url: "/filter/Novels" },
-  { title: "Научные", url: "/filter/Scientific" },
-  { title: "Исскуство", url: "/filter/Art" },
-  { title: "Учебные", url: "/filter/Tutorials" },
+  { title: "Все", url: "/", id: "1" },
+  { title: "От ShareBook", url: "/filter/FromShareBook", id: "2" },
+  { title: "Детективы", url: "/filter/Detectives", id: "3" },
+  { title: "Романы", url: "/filter/Novels", id: "4" },
+  { title: "Научные", url: "/filter/Scientific", id: "5" },
+  { title: "Исскуство", url: "/filter/Art", id: "6" },
+  { title: "Учебные", url: "/filter/Tutorials", id: "7" },
 ];
 
 export function FilterGenre() {
@@ -21,9 +22,9 @@ export function FilterGenre() {
 
   return (
     <div className={styles.containerGenres}>
-      {genres.map((genre, idx) => (
+      {genres.map((genre) => (
         <NavLink
-          key={idx}
+          key={genre.id}
           to={{ pathname: genre.url, search: searchParams.toString() }}
           className={(isActive) =>
             isActive.isActive

@@ -7,7 +7,9 @@ const books = data.data;
 export function BookCardComponent() {
   return (
     <div className={styles.container}>
-      <BookCard books={books} />
+      {books.map((book) => (
+        <BookCard book={book} />
+      ))}
     </div>
   );
 }
