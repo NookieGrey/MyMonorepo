@@ -1,5 +1,7 @@
 import fs from "node:fs/promises";
 import express from "express";
+import { createI18nInstance } from "./i18n.server.js";
+import i18nextMiddleware from "i18next-http-middleware";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -32,10 +34,23 @@ if (!isProduction) {
   app.use(base, sirv("./dist/client", { extensions: [] }));
 }
 
+app.use((req, res, next) => {
+  // создаём новый экземпляр i18n
+  const i18nInstance = createI18nInstance();
+
+  // подключаем middleware, передавая наш экземпляр
+  i18nextMiddleware.handle(i18nInstance)(req, res, next);
+});
+
 // Serve HTML
 app.use("*", async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, "/");
+
+    const initialI18nStore = {};
+    req.i18n.languages.forEach((lng) => {
+      initialI18nStore[lng] = req.i18n.store.data[lng] || {};
+    });
 
     /** @type {string} */
     let template;
@@ -51,9 +66,19 @@ app.use("*", async (req, res) => {
       render = (await import("./dist/server/entry-server.js")).render;
     }
 
-    const rendered = await render(url);
+    const rendered = await render(url, req.i18n);
 
     const html = template
+      .replace(
+        `<!--i18n-head-->`,
+        `
+      <script>
+          window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
+          window.initialLanguage = '${req.i18n.language}';
+        </script>
+      `,
+      )
+      .replace(`<!--i18n-lang-->`, req.i18n.language)
       .replace(`<!--home-head-->`, rendered.head ?? "")
       .replace(`<!--home-body-->`, rendered.body ?? "");
 

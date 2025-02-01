@@ -1,10 +1,25 @@
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "./auth.module.scss";
+import { useRegistrationMutation } from "./auth.ts";
+import { useNavigate } from "react-router";
 
 export function SignUp() {
-  const onFinish: FormProps["onFinish"] = (values) => {
+  const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegistrationMutation();
+
+  const onFinish: FormProps["onFinish"] = async (values) => {
     console.log("Success:", values);
+    try {
+      await register(values).unwrap();
+      // Being that the result is handled in extraReducers in authSlice,
+      // we know that we're authenticated after this, so the user
+      // and token will be present in the store
+      navigate("/");
+    } catch (err) {
+      console.log("err:", err);
+    }
   };
 
   const onFinishFailed: FormProps["onFinishFailed"] = (errorInfo) => {
@@ -23,11 +38,27 @@ export function SignUp() {
         autoComplete="off"
       >
         <Form.Item
-          label="Username"
-          name="username"
+          label="Name"
+          name="name"
+          rules={[{ required: true, message: "Please input your name!" }]}
+        >
+          <Input autoComplete="name" />
+        </Form.Item>
+
+        <Form.Item
+          label="Login"
+          name="login"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
-          <Input />
+          <Input autoComplete="login" />
+        </Form.Item>
+
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
+        >
+          <Input autoComplete="email" />
         </Form.Item>
 
         <Form.Item
@@ -35,12 +66,12 @@ export function SignUp() {
           name="password"
           rules={[{ required: true, message: "Please input your password!" }]}
         >
-          <Input.Password />
+          <Input.Password autoComplete="new-password" />
         </Form.Item>
 
         <Form.Item
           label="Repeat Password"
-          name="secondPassword"
+          name="passwordConfirm"
           rules={[
             { required: true, message: "Please input your password!" },
             ({ getFieldValue }) => ({
@@ -55,11 +86,11 @@ export function SignUp() {
             }),
           ]}
         >
-          <Input.Password />
+          <Input.Password autoComplete="new-password" />
         </Form.Item>
 
         <Form.Item label={null}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={isLoading}>
             Submit
           </Button>
         </Form.Item>
