@@ -19,10 +19,9 @@ i18next
         useSuspense: false,
       },
     },
-    () => {
-      hydrateRoot(
-        document.getElementById("sharebook") as HTMLElement,
-        <App location={location.href} i18n={i18next} />,
+    () => {hydrateRoot(
+  document.getElementById("sharebook") as HTMLElement,
+  <App location={location.href} i18n={i18next} />,
       );
     },
   );
