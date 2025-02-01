@@ -1,4 +1,4 @@
-import { NavLink , useSearchParams} from "react-router";
+import { NavLink, useSearchParams } from "react-router";
 import styles from "../filter.module.scss";
 
 interface Genre {
@@ -7,13 +7,13 @@ interface Genre {
 }
 
 const genres: Genre[] = [
-  {title: "Все", url: "/"},
-  {title: "От ShareBook", url: "/filter/FromShareBook"},
-  {title: "Детективы", url: "/filter/Detectives"},
-  {title: "Романы", url: "/filter/Novels"},
-  {title: "Научные", url: "/filter/Scientific"},
-  {title: "Исскуство", url: "/filter/Art"},
-  {title: "Учебные", url: "/filter/Tutorials"},
+  { title: "Все", url: "/" },
+  { title: "От ShareBook", url: "/filter/FromShareBook" },
+  { title: "Детективы", url: "/filter/Detectives" },
+  { title: "Романы", url: "/filter/Novels" },
+  { title: "Научные", url: "/filter/Scientific" },
+  { title: "Исскуство", url: "/filter/Art" },
+  { title: "Учебные", url: "/filter/Tutorials" },
 ];
 
 export function FilterGenre() {
@@ -24,7 +24,7 @@ export function FilterGenre() {
       {genres.map((genre, idx) => (
         <NavLink
           key={idx}
-          to={{pathname: genre.url, search: searchParams.toString()}}
+          to={{ pathname: genre.url, search: searchParams.toString() }}
           className={(isActive) =>
             isActive.isActive
               ? `${styles.buttonGenre} ${styles.buttonActive}`

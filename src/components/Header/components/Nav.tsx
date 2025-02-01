@@ -1,5 +1,5 @@
 import styles from "../header.module.scss";
-import {NavLink} from "react-router";
+import { NavLink } from "react-router";
 
 interface MainMenuItem {
   title: string;

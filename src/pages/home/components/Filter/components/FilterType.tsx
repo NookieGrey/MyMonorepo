@@ -1,8 +1,8 @@
-import {Dropdown} from "antd";
+import { Dropdown } from "antd";
 import styles from "../filter.module.scss";
-import {useState} from "react";
-import {SvgArrow} from "../svg/SvgArrow.tsx";
-import {useSearchParams} from "react-router";
+import { useState } from "react";
+import { SvgArrow } from "../svg/SvgArrow.tsx";
+import { useSearchParams } from "react-router";
 
 interface Type {
   label: string;
@@ -39,7 +39,8 @@ export function FilterType() {
       onOpenChange={(vis) => setShowListState(vis)}
     >
       <button className={styles.buttonTypeFilter}>
-        {types.find((item) => item.key === filterType)?.label ?? defaultType.label}
+        {types.find((item) => item.key === filterType)?.label ??
+          defaultType.label}
         <SvgArrow showListState={showListState} />
       </button>
     </Dropdown>

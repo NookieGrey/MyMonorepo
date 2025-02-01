@@ -1,4 +1,4 @@
-import type {ThemeConfig} from "antd";
+import type { ThemeConfig } from "antd";
 
 export const antdThemeConfig: ThemeConfig = {
   cssVar: true,
@@ -18,7 +18,7 @@ export const antdThemeConfig: ThemeConfig = {
     },
     Input: {
       colorText: "#000000",
-      activeBorderColor: "rgb(42, 127, 255, 80)",
+      activeBorderColor: "rgba(42, 127, 255, 80)",
       fontFamily: "Onest-Regular",
       hoverBorderColor: "transparent",
       colorBorder: "transparent",
@@ -30,15 +30,15 @@ export const antdThemeConfig: ThemeConfig = {
     Dropdown: {
       paddingBlock: 6,
       controlPaddingHorizontal: 10,
-      boxShadowSecondary: "0px 2px 7px rgb(0, 0, 0, 0.15)",
+      boxShadowSecondary: "0px 2px 7px rgba(0, 0, 0, 0.15)",
       fontFamily: "Onest-Regular",
       colorBgElevated: "#FFFFFF",
     },
     Card: {
       paddingLG: 0,
       borderRadiusLG: 10,
-      boxShadow: "0px 20px 7px rgb(42, 127, 255, 80)",
-      boxShadowTertiary: "0px 2px 7px rgb(42, 127, 255, 80)",
+      boxShadow: "0px 20px 7px rgba(42, 127, 255, 80)",
+      boxShadowTertiary: "0px 2px 7px rgba(42, 127, 255, 80)",
       colorBgContainer: "#FFFFFF",
     },
   },
