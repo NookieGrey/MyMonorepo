@@ -1,1 +1,1 @@
-export { BookCardComponent } from './BookCardComponent.tsx';
+export { BookCardComponent } from "./components/BookCardComponent.tsx";

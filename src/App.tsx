@@ -8,10 +8,9 @@ import type Entity from "@ant-design/cssinjs/es/Cache";
 import { StyleProvider } from "@ant-design/cssinjs";
 import { I18nextProvider } from "react-i18next";
 import type { i18n } from "i18next";
+import "./index.css";
 
-export function App({
-  location,
-  cache,
+export function App({ location, cache ,
   i18n,
 }: {
   location: string;

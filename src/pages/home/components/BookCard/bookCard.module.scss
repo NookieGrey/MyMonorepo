@@ -1,0 +1,50 @@
+.container {
+  margin-top: 30px;
+
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  gap: 30px;
+}
+
+.containerImage {
+  width: 202px !important;
+  height: 304px;
+  padding: 20px 20px 0;
+
+  img {
+    height: 304px;
+  }
+}
+
+.containerContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 15px;
+  margin-top: 9px;
+}
+
+.containerInfoBook {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  .title {
+    line-height: 135%;
+    font-family: "Literata-Medium", sans-serif;
+    color: var(--ant-color-text-base);
+  }
+
+  .author {
+    font-family: "Onest-Medium", sans-serif;
+    text-decoration: underline;
+    color: var(--ant-color-primary);
+    line-height: 19px;
+  }
+}
+
+.location {
+  margin: 11px 0 0;
+  line-height: 135%;
+  font-family: "Onest-Regular", sans-serif;
+  color: var(--ant-color-text-placeholder);
+}

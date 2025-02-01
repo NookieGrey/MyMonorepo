@@ -1,69 +1,73 @@
 .container {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
-	max-width: 1330px;
-	margin: 20px auto 0 auto;
-
+.containerGenres {
+  display: flex;
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 15px;
 }
 
 .buttonGenre {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-	height: 40px;
-	padding-left: 25px;
-	padding-right: 25px;
-	border-radius: 11px;
+  height: 40px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 11px;
 }
 
 .buttonDefault {
-	cursor: pointer;
-	background: unset;
-	color: #909090;
-	transition: 0.2s all ease;
+  cursor: pointer;
+  background: unset;
+  color: var(--ant-color-text-placeholder);
+  transition: 0.2s all ease;
 
-	&:hover {
-		transition: 0.2s all ease;
-		color: var(--ant-color-text-base);
-	}
+  &:hover {
+    transition: 0.2s all ease;
+    color: var(--ant-color-text-base);
+  }
 }
 
 .buttonActive {
-	pointer-events: none;
-	background: var(--ant-color-primary);
-	color: #FFFFFF;
+  pointer-events: none;
+  background: var(--ant-color-primary);
+  color: #ffffff;
 }
 
 .buttonTypeFilter {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-	gap: 42px;
-	min-width: 159px;
-	padding: 0 21px 0;
-	height: 40px;
-	border-radius: 11px;
+  gap: 66px;
+  min-width: 159px;
+  padding: 0 21px 0;
+  height: 40px;
+  border-radius: 11px;
 
-	cursor: pointer;
-	border: none;
-	background: var(--ant-color-bg-elevated);
-	color: var(--ant-color-primary);
+  cursor: pointer;
+  border: none;
+  font-family: "Onest-Regular", sans-serif;
+  background: rgba(241, 244, 246, 80%);
+  color: var(--ant-color-primary);
 }
 
 .svgDefault {
-	transition: .2s;
+  transition: 0.2s;
 }
 
 .svgActive {
-	rotate: 180deg;
+  rotate: 180deg;
 }
 
 .typeFilter {
-	backdrop-filter: blur(50px);
-	ul {
-		margin-top: 2px !important;
-	}
+  backdrop-filter: blur(50px);
+  ul {
+    margin-top: 2px !important;
+  }
 }
