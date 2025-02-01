@@ -12,6 +12,7 @@ export interface SignInRequest {
 
 export const authApi = createApi({
   baseQuery: fetchBaseQuery({
+    mode: "cors",
     baseUrl: "https://194.67.125.199:8443/",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
