@@ -1,7 +1,10 @@
-export function SvgSearch() {
+import styles from "../header.module.scss";
+
+export function SvgSearch({ focusSearch }: { focusSearch: boolean }) {
   return (
     <svg width="18" height="18" fill="none">
       <path
+        className={focusSearch ? styles.svgSearch : ""}
         stroke="#909090"
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -9,7 +9,11 @@ interface Props {
 export function BookCardComponent({ books }: Props) {
   return (
     <div className={styles.container}>
-      {(books as unknown as BookDto[])?.map((book) => <BookCard book={book} />)}
+      {(books as unknown as BookDto[])?.map((book) => {
+        // @ts-expect-error WIP
+        const bookId = book.bookId;
+        return <BookCard book={book} key={bookId} />;
+      })}
     </div>
   );
 }

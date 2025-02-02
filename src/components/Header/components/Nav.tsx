@@ -10,6 +10,7 @@ const mainMenuItems: MainMenuItem[] = [
   { title: "Главная", url: "/" },
   { title: "Избранное", url: "/Favourites" },
   { title: "Чаты", url: "/Chats" },
+  { title: "Новое объявление", url: "/NewAd" },
 ];
 
 export function Nav() {

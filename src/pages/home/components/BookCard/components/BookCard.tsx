@@ -8,31 +8,29 @@ export function BookCard({ book }: { book: BookDto }) {
   const attachment = book.attachment;
 
   return (
-    <>
-      <Card
-        cover={
-          <div className={styles.containerImage}>
-            <img
-              alt={book.title}
-              src={
-                attachment
-                  ? `data:image/${attachment.expansion?.slice(1) ?? "jpg"};base64,${attachment?.data}`
-                  : img1
-              }
-            />
-          </div>
-        }
-        hoverable
-        className={styles.card}
-      >
-        <div className={styles.containerContent}>
-          <div className={styles.containerInfoBook}>
-            <div className={styles.title}>{book.title}</div>
-            <a className={styles.author}>{book.author}</a>
-          </div>
-          <p className={styles.location}>{book.genre}</p>
+    <Card
+      cover={
+        <div className={styles.containerImage}>
+          <img
+            alt={book.title}
+            src={
+              attachment
+                ? `data:image/${attachment.expansion?.slice(1) ?? "jpg"};base64,${attachment?.data}`
+                : img1
+            }
+          />
         </div>
-      </Card>
-    </>
+      }
+      hoverable
+      className={styles.card}
+    >
+      <div className={styles.containerContent}>
+        <div className={styles.containerInfoBook}>
+          <div className={styles.title}>{book.title}</div>
+          <a className={styles.author}>{book.author}</a>
+        </div>
+        <p className={styles.location}>{book.genre}</p>
+      </div>
+    </Card>
   );
 }

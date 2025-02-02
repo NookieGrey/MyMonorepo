@@ -13,8 +13,8 @@
   flex: 1;
   padding: 0 35px 0;
 
-  font-family: "Onest-Regular", sans-serif;
-  font-size: 15px;
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 16px;
 }
 
 .logo {
@@ -27,7 +27,6 @@
   justify-content: center;
   list-style: none;
   margin: 0;
-
   padding: 0 40px 0;
   gap: 30px;
 
@@ -41,7 +40,6 @@
   }
 
   .activeMenuItem {
-    font-family: "Onest-Medium", sans-serif;
     color: var(--ant-color-text-base);
   }
 }
@@ -51,11 +49,11 @@
 }
 
 .containerSearch {
-  width: 403px;
+  width: 424px;
 }
 
 .miniContainerSearch {
-  width: 395px;
+  width: 421px;
   display: flex;
   align-items: center;
 
@@ -81,8 +79,12 @@
   }
 }
 
+.svgSearchFocus {
+  stroke: var(--ant-color-primary);
+}
+
 .avatar {
-  max-width: 36px;
-  min-width: 36px !important;
-  height: 36px;
+  max-width: 38px;
+  min-width: 38px !important;
+  height: 38px;
 }
