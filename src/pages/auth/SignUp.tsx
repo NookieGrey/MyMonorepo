@@ -12,7 +12,7 @@ export function SignUp() {
   const onFinish: FormProps["onFinish"] = async (values) => {
     console.log("Success:", values);
     try {
-      await register(values).unwrap();
+      await register({ userRegistrationDto: values }).unwrap();
       // Being that the result is handled in extraReducers in authSlice,
       // we know that we're authenticated after this, so the user
       // and token will be present in the store
@@ -53,11 +53,7 @@ export function SignUp() {
           <Input autoComplete="login" />
         </Form.Item>
 
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[{ required: true, message: "Please input your email!" }]}
-        >
+        <Form.Item label="Email" name="email">
           <Input autoComplete="email" />
         </Form.Item>
 
