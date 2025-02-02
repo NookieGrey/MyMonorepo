@@ -9,8 +9,11 @@ import { StyleProvider } from "@ant-design/cssinjs";
 import { I18nextProvider } from "react-i18next";
 import type { i18n } from "i18next";
 import "./index.css";
+import "antd/dist/reset.css";
 
-export function App({ location, cache ,
+export function App({
+  location,
+  cache,
   i18n,
 }: {
   location: string;
