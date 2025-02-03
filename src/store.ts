@@ -1,23 +1,30 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { sharebookApi } from "./services/api/sharebookApi.ts";
-import { authReducer } from "./services/auth/authSlice.tsx";
+import authReducer from "./services/auth/authSlice";
+import { sharebookApi } from "./services/api/sharebookApi";
 
 const rootReducer = combineReducers({
   [sharebookApi.reducerPath]: sharebookApi.reducer,
   auth: authReducer,
 });
 
-export function setupStore(preloadedState?: AppState) {
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = ReturnType<typeof setupStore>["dispatch"];
+
+export function setupStore(preloadedState?: Partial<RootState>) {
   return configureStore({
     reducer: rootReducer,
     preloadedState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(sharebookApi.middleware),
+      getDefaultMiddleware({
+        // Чтобы Redux не ругался на несериализуемый refreshPromise
+        serializableCheck: {
+          ignoredActions: [
+            "auth/startRefresh",
+            "auth/finishRefresh",
+            "auth/clearRefreshPromise",
+          ],
+          ignoredPaths: ["auth.refreshPromise"],
+        },
+      }).concat(sharebookApi.middleware),
   });
 }
-
-export type AppState = ReturnType<typeof rootReducer>;
-export type AppDispatch = ReturnType<typeof setupStore>["dispatch"];
-
-export type AppStore = ReturnType<typeof setupStore>;
-export type RootState = ReturnType<AppStore["getState"]>;

@@ -12,7 +12,7 @@
     "start": "npm run build && npm run preview",
     "lint": "eslint . --fix",
     "prettier": "prettier . --write",
-    "apigen": "node ./node_modules/@rtk-query/codegen-openapi/lib/bin/cli.mjs ./openapi-config.json"
+    "apigen": "cross-env NODE_TLS_REJECT_UNAUTHORIZED='0' node ./node_modules/@rtk-query/codegen-openapi/lib/bin/cli.mjs ./openapi-config.json"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",

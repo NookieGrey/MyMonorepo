@@ -1,28 +1,41 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { sharebookApi } from "../api/sharebookApi.ts";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type AuthState = {
-  token?: string | null;
+interface AuthState {
+  accessToken: string | null;
+  isRefreshing: boolean;
+  refreshPromise: Promise<string> | null;
+}
+
+const initialState: AuthState = {
+  accessToken: null,
+  isRefreshing: false,
+  refreshPromise: null,
 };
 
-const slice = createSlice({
+const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    token: null,
-  } as AuthState,
+  initialState,
   reducers: {
-    logout(state) {
-      state.token = null;
+    setAccessToken(state, action: PayloadAction<string>) {
+      state.accessToken = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      sharebookApi.endpoints.auth.matchFulfilled,
-      (state, { payload }) => {
-        state.token = payload.accessToken;
-      },
-    );
+    startRefresh(state, action: PayloadAction<Promise<string>>) {
+      state.isRefreshing = true;
+      state.refreshPromise = action.payload;
+    },
+    finishRefresh(state) {
+      state.isRefreshing = false;
+      state.refreshPromise = null;
+    },
+    logout(state) {
+      state.accessToken = null;
+      state.isRefreshing = false;
+      state.refreshPromise = null;
+    },
   },
 });
 
-export const authReducer = slice.reducer;
+export const { setAccessToken, startRefresh, finishRefresh, logout } =
+  authSlice.actions;
+
+export default authSlice.reducer;

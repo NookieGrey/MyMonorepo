@@ -1,5 +1,5 @@
 {
-  "schemaFile": "./api-docs.json",
+  "schemaFile": "https://194.67.125.199:8443/v3/api-docs",
   "apiFile": "./src/services/api/emptyApi.ts",
   "apiImport": "emptySplitApi",
   "outputFile": "./src/services/api/sharebookApi.ts",

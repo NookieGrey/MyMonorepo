@@ -1,67 +1,100 @@
-import {
+import type {
   BaseQueryFn,
   FetchArgs,
-  fetchBaseQuery,
   FetchBaseQueryError,
-} from "@reduxjs/toolkit/query/react";
+} from "@reduxjs/toolkit/query";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  finishRefresh,
+  logout,
+  setAccessToken,
+  startRefresh,
+} from "./authSlice";
 import type { RootState } from "../../store";
 
-// Создаем базовый fetchBaseQuery
-const baseQuery = fetchBaseQuery({
+// Исходный fetchBaseQuery
+const rawBaseQuery = fetchBaseQuery({
   mode: "cors",
   baseUrl: "https://194.67.125.199:8443/",
-  prepareHeaders: (headers, { getState }) => {
-    const state = getState() as RootState;
-    const accessToken = state.auth.token;
-
-    if (accessToken) {
-      headers.set("Authorization", `Bearer ${accessToken}`);
+  credentials: "include",
+  prepareHeaders: (headers, api) => {
+    const state = api.getState() as RootState;
+    const token = state.auth.accessToken;
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
     }
-
     return headers;
-  },
-  // Настройки кук, если нужно в каждом запросе прокидывать credentials
-  credentials: "include", // если нужно передавать куки, в т.ч. refresh token (HttpOnly)
-  fetchFn: (...args) => {
-    return fetch(...args).catch((err) => {
-      console.error(err);
-
-      throw err;
-    });
   },
 });
 
-// Обёртка над baseQuery, чтобы автоматически обрабатывать 401
+// Наша обёртка
 export const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
+  // 1) Выполняем запрос
+  let result = await rawBaseQuery(args, api, extraOptions);
 
-  // Если получили 401, пытаемся рефрешнуть токен
+  // 2) Если 401 — пытаемся рефрешнуть
   if (result.error && result.error.status === 401) {
-    console.log("Access token is expired, try to refresh...");
+    const { dispatch, getState } = api;
+    const state = getState() as RootState;
 
-    // Пытаемся обратиться к refresh endpoint
-    const refreshResult = await baseQuery(
-      { url: "/refresh", method: "POST" },
-      api,
-      extraOptions,
-    );
+    if (!state.auth.isRefreshing) {
+      // Если рефреш ещё не запущен, запускаем
+      const refreshP = (async () => {
+        const refreshResp = await rawBaseQuery(
+          { url: "/refresh", method: "POST" },
+          api,
+          extraOptions,
+        );
+        if (refreshResp.data) {
+          // сервер вернул новый accessToken
+          const newToken = (refreshResp.data as { accessToken: string })
+            .accessToken;
+          dispatch(setAccessToken(newToken));
+          return newToken;
+        } else {
+          dispatch(logout());
+          throw new Error("Refresh failed");
+        }
+      })();
 
-    if (refreshResult.data) {
-      // Допустим, сервер вернул новый accessToken
-      const { accessToken } = refreshResult.data as { accessToken: string };
+      // Записываем промис в store
+      dispatch(startRefresh(refreshP));
 
-      // Сохраняем новый accessToken в Redux
-      api.dispatch({ type: "auth/setAccessToken", payload: accessToken });
+      try {
+        // Ждём, пока рефреш завершится
+        await refreshP;
+      } catch {
+        // Если упало — возвращаем 401
+        return { error: { status: 401, data: "Refresh failed" } } as {
+          error: FetchBaseQueryError;
+        };
+      } finally {
+        // в любом случае снимаем флаг
+        dispatch(finishRefresh());
+      }
 
-      // Повторяем запрос с новым токеном
-      result = await baseQuery(args, api, extraOptions);
-      // } else {
-      // Если refresh неудачен – делаем логаут (например)
-      // api.dispatch({ type: "auth/logout" });
+      // Успешно рефрешнулись, пробуем запрос заново
+      result = await rawBaseQuery(args, api, extraOptions);
+    } else {
+      // Уже идёт рефреш, ждём существующий promise
+      const existingPromise = state.auth.refreshPromise;
+      if (existingPromise) {
+        try {
+          await existingPromise;
+        } catch {
+          return { error: { status: 401, data: "Refresh failed" } } as {
+            error: FetchBaseQueryError;
+          };
+        } finally {
+          dispatch(finishRefresh());
+        }
+        // Повторяем запрос
+        result = await rawBaseQuery(args, api, extraOptions);
+      }
     }
   }
 
