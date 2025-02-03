@@ -1,6 +1,9 @@
 import styles from "../bookCard.module.scss";
 import { BookCard } from "./BookCard.tsx";
-import { BookDto, BooksApiResponse } from "../../../../../api/sharebookApi.ts";
+import {
+  BookDto,
+  BooksApiResponse,
+} from "../../../../../services/api/sharebookApi.ts";
 
 interface Props {
   books?: BooksApiResponse;

@@ -2,7 +2,7 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "./auth.module.scss";
 import { useNavigate } from "react-router";
-import { useRegisterUserMutation } from "../../api/sharebookApi.ts";
+import { useRegisterUserMutation } from "../../services/api/sharebookApi.ts";
 
 export function SignUp() {
   const navigate = useNavigate();

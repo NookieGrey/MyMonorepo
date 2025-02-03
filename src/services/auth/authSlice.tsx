@@ -1,26 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { sharebookApi } from "../../api/sharebookApi.ts";
+import { sharebookApi } from "../api/sharebookApi.ts";
 
 type AuthState = {
-  token: string | undefined;
+  token?: string | null;
 };
 
 const slice = createSlice({
   name: "auth",
-  // todo remove localStorage for sure
   initialState: {
-    token: import.meta.env.SSR
-      ? undefined
-      : localStorage.getItem("accessToken"),
+    token: null,
   } as AuthState,
-  reducers: {},
+  reducers: {
+    logout(state) {
+      state.token = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addMatcher(
       sharebookApi.endpoints.auth.matchFulfilled,
       (state, { payload }) => {
         state.token = payload.accessToken;
-        if (payload.accessToken)
-          localStorage.setItem("accessToken", payload.accessToken);
       },
     );
   },

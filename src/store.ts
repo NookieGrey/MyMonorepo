@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { authReducer } from "./pages/auth/authSlice.tsx";
-import { sharebookApi } from "./api/sharebookApi.ts";
+import { authReducer } from "./services/auth/authSlice.tsx";
+import { sharebookApi } from "./services/api/sharebookApi.ts";
 
 export const store = configureStore({
   reducer: {

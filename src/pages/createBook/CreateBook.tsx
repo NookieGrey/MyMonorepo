@@ -1,5 +1,8 @@
 import { Button, Form, Input } from "antd";
-import { BookDto, useSaveBookMutation } from "../../api/sharebookApi.ts";
+import {
+  BookDto,
+  useSaveBookMutation,
+} from "../../services/api/sharebookApi.ts";
 import styles from "./createBook.module.scss";
 
 export function CreateBook() {

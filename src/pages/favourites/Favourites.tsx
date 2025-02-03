@@ -1,4 +1,4 @@
-import { useGetProfileQuery } from "../../api/sharebookApi.ts";
+import { useGetProfileQuery } from "../../services/api/sharebookApi.ts";
 
 export function Favourites() {
   const args = useGetProfileQuery({ userId: "-1", zone: 4 });
