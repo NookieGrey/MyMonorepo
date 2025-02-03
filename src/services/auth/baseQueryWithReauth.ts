@@ -15,9 +15,7 @@ import type { RootState } from "../../store";
 // Исходный fetchBaseQuery
 const rawBaseQuery = fetchBaseQuery({
   mode: "cors",
-  baseUrl: import.meta.env.PROD
-    ? "https://194.67.125.199:8443/"
-    : "https://frontend-wmyr.onrender.com/api",
+  baseUrl: "https://194.67.125.199:8443/",
   credentials: "include",
   prepareHeaders: (headers, api) => {
     const state = api.getState() as RootState;
