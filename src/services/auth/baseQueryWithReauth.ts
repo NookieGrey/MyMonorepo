@@ -22,6 +22,13 @@ const baseQuery = fetchBaseQuery({
   },
   // Настройки кук, если нужно в каждом запросе прокидывать credentials
   credentials: "include", // если нужно передавать куки, в т.ч. refresh token (HttpOnly)
+  fetchFn: (...args) => {
+    return fetch(...args).catch((err) => {
+      console.error(err);
+
+      throw err;
+    });
+  },
 });
 
 // Обёртка над baseQuery, чтобы автоматически обрабатывать 401

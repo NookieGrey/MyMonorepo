@@ -3,7 +3,7 @@ import { App as AntDApp, ConfigProvider } from "antd";
 import { antdThemeConfig } from "./antdConfig.ts";
 import { AppRouter } from "./AppRouter.tsx";
 import { Provider as ReduxProvider } from "react-redux";
-import { store } from "./store.ts";
+import { AppStore } from "./store.ts";
 import type Entity from "@ant-design/cssinjs/es/Cache";
 import { StyleProvider } from "@ant-design/cssinjs";
 import { I18nextProvider } from "react-i18next";
@@ -15,10 +15,12 @@ export function App({
   location,
   cache,
   i18n,
+  store,
 }: {
   location: string;
   cache?: Entity;
   i18n: i18n;
+  store: AppStore;
 }) {
   return (
     <StrictMode>

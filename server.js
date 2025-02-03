@@ -72,11 +72,19 @@ app.use("*", async (req, res) => {
       .replace(
         `<!--i18n-head-->`,
         `
-      <script>
-          window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
-          window.initialLanguage = '${req.i18n.language}';
+        <script>
+            window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
+            window.initialLanguage = '${req.i18n.language}';
         </script>
       `,
+      )
+      .replace(
+        `<!--preloaded-state-->`,
+        `
+        <script>
+            window.__PRELOADED_STATE__ = ${JSON.stringify(rendered.state).replace(/</g, "\\u003c")};
+        </script>
+        `,
       )
       .replace(`<!--i18n-lang-->`, req.i18n.language)
       .replace(`<!--home-head-->`, rendered.head ?? "")
