@@ -4,6 +4,7 @@ import { HeaderComponent } from "./components/Header";
 import { Auth } from "./pages/auth";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
+import { BookPage } from "./pages/book/index.tsx";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
@@ -17,6 +18,7 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/auth" element={<Auth />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
+        <Route path="/book" element={<BookPage />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
       </Routes>
     </Router>
