@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { sharebookApi } from "../api/sharebookApi.ts";
 
 interface AuthState {
   accessToken: string | null;
@@ -32,6 +33,14 @@ const authSlice = createSlice({
       state.isRefreshing = false;
       state.refreshPromise = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      sharebookApi.endpoints.auth.matchFulfilled,
+      (state, { payload }) => {
+        state.accessToken = payload.accessToken ?? null;
+      },
+    );
   },
 });
 
