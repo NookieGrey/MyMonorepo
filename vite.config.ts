@@ -12,5 +12,13 @@ export default defineConfig({
       port: 8004,
       clientPort: 8007,
     },
+    proxy: {
+      "/api": {
+        target: "https://194.67.125.199:8443/",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
 });

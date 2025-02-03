@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import express from "express";
 import { createI18nInstance } from "./i18n.server.js";
 import i18nextMiddleware from "i18next-http-middleware";
+import cookieParser from "cookie-parser";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -15,6 +16,7 @@ const templateHtml = isProduction
 
 // Create http server
 const app = express();
+app.use(cookieParser());
 
 // Add Vite or respective production middlewares
 /** @type {import('vite').ViteDevServer | undefined} */
@@ -44,6 +46,8 @@ app.use((req, res, next) => {
 
 // Serve HTML
 app.use("*", async (req, res) => {
+  console.log(req.cookies);
+
   try {
     const url = req.originalUrl.replace(base, "/");
 
@@ -100,7 +104,7 @@ app.use("*", async (req, res) => {
 
 // Start http server
 const server = app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  console.log(`Server started at https://frontend-wmyr.onrender.com/`);
 });
 
 server.keepAliveTimeout = 120 * 1000;
