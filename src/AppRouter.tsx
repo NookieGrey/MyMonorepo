@@ -14,7 +14,7 @@ export function AppRouter({ location }: { location: string }) {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/filter/:genre" element={<Home />} />
-        <Route path="/auth" element={<Auth />} />
+        <Route path="" element={<Auth />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
         <Route path={"*"} element={<div>404 page not found</div>} />

@@ -1,19 +1,23 @@
 import styles from "../header.module.scss";
 import { Button } from "antd";
 import { SvgAvatar } from "../svg/SvgAvatar.tsx";
-import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router";
+import { Auth } from "../../../pages/auth";
 
 export function Avatar() {
-  const navigate = useNavigate();
+  const [, setSearchParams] = useSearchParams();
 
   return (
-    <Button
-      className={styles.avatar}
-      type="primary"
-      shape="circle"
-      onClick={() => navigate("/auth")}
-    >
-      <SvgAvatar />
-    </Button>
+    <>
+      <Button
+        className={styles.avatar}
+        type="primary"
+        shape="circle"
+        onClick={() => setSearchParams({ auth: "open" })}
+      >
+        <SvgAvatar />
+        <Auth />
+      </Button>
+    </>
   );
 }

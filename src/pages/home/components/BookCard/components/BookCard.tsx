@@ -22,7 +22,9 @@ export function BookCard({ book }: { book: BookDto }) {
         </div>
       }
       hoverable
-      className={styles.card}
+      classNames={{
+        cover: styles.cover,
+      }}
     >
       <div className={styles.containerContent}>
         <div className={styles.containerInfoBook}>

@@ -8,9 +8,9 @@ interface MainMenuItem {
 
 const mainMenuItems: MainMenuItem[] = [
   { title: "Главная", url: "/" },
-  { title: "Избранное", url: "/Favourites" },
-  { title: "Чаты", url: "/Chats" },
-  { title: "Новое объявление", url: "/NewAd" },
+  { title: "Избранное", url: "/favourites" },
+  { title: "Чаты", url: "/chats" },
+  { title: "Новое объявление", url: "/createBook" },
 ];
 
 export function Nav() {

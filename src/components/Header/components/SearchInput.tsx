@@ -3,7 +3,7 @@ import { Input } from "antd";
 import { SvgSearch } from "../svg/SvgSearch.tsx";
 import { useState } from "react";
 
-export function Search() {
+export function SearchInput() {
   const [focusSearch, setFocusSearch] = useState(false);
 
   return (
@@ -13,8 +13,9 @@ export function Search() {
           placeholder="Ищите фентези, детективы, романы"
           onFocus={() => setFocusSearch(true)}
           onBlur={() => setFocusSearch(false)}
+          className={styles.search}
+          suffix={<SvgSearch focusSearch={focusSearch} />}
         ></Input>
-        <SvgSearch focusSearch={focusSearch} />
       </div>
     </div>
   );

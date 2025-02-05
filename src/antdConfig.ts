@@ -12,9 +12,11 @@ export const antdThemeConfig: ThemeConfig = {
   },
   components: {
     Button: {
+      fontFamily: "Onest-Medium",
+      fontSize: 16,
       colorPrimaryHover: "#2A7FFF",
-      controlHeight: 40,
-      paddingContentHorizontal: 25,
+      controlHeight: 42,
+      borderRadius: 9,
     },
     Input: {
       colorText: "#000000",
@@ -25,8 +27,11 @@ export const antdThemeConfig: ThemeConfig = {
       colorBorder: "transparent",
       lineWidth: 2,
       controlHeight: 38,
-      paddingInline: 15,
-      borderRadius: 38,
+      paddingInline: 14,
+      borderRadius: 9,
+    },
+    Form: {
+      itemMarginBottom: 0,
     },
     Dropdown: {
       paddingBlock: 6,
