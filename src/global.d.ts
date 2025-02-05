@@ -18,5 +18,6 @@ declare global {
         [namespace: string]: any;
       };
     };
+    __PRELOADED_STATE__?: any;
   }
 }

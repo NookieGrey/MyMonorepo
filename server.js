@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import express from "express";
 import { createI18nInstance } from "./i18n.server.js";
 import i18nextMiddleware from "i18next-http-middleware";
+import cookieParser from "cookie-parser";
+import proxy from "express-http-proxy";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
@@ -15,6 +17,23 @@ const templateHtml = isProduction
 
 // Create http server
 const app = express();
+app.use(cookieParser());
+
+app.use(
+  "/api",
+  proxy("https://194.67.125.199:8443/", {
+    userResHeaderDecorator(headers, userReq, userRes, proxyReq, proxyRes) {
+      if (
+        (userReq.url === "/auth" || userReq.url === "/refresh") &&
+        userRes.statusCode === 200
+      ) {
+        headers["set-cookie"][0] += "; path=/";
+      }
+      // recieves an Object of headers, returns an Object of headers.
+      return headers;
+    },
+  }),
+);
 
 // Add Vite or respective production middlewares
 /** @type {import('vite').ViteDevServer | undefined} */
@@ -66,17 +85,29 @@ app.use("*", async (req, res) => {
       render = (await import("./dist/server/entry-server.js")).render;
     }
 
-    const rendered = await render(url, req.i18n);
+    const rendered = await render(url, req.i18n, req.cookies);
+
+    if (rendered.returnCookie) {
+      res.set("Set-Cookie", `${rendered.returnCookie};path=/`);
+    }
 
     const html = template
       .replace(
         `<!--i18n-head-->`,
         `
-      <script>
-          window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
-          window.initialLanguage = '${req.i18n.language}';
+        <script>
+            window.initialI18nStore = ${JSON.stringify(initialI18nStore)};
+            window.initialLanguage = '${req.i18n.language}';
         </script>
       `,
+      )
+      .replace(
+        `<!--preloaded-state-->`,
+        `
+        <script>
+            window.__PRELOADED_STATE__ = ${JSON.stringify(rendered.state).replace(/</g, "\\u003c")};
+        </script>
+        `,
       )
       .replace(`<!--i18n-lang-->`, req.i18n.language)
       .replace(`<!--home-head-->`, rendered.head ?? "")
@@ -92,7 +123,7 @@ app.use("*", async (req, res) => {
 
 // Start http server
 const server = app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  console.log(`Server started at https://frontend-wmyr.onrender.com/`);
 });
 
 server.keepAliveTimeout = 120 * 1000;

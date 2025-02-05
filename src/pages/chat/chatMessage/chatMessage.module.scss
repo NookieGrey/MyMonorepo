@@ -1,0 +1,23 @@
+.wrapper {
+  border-radius: 12px;
+  background: #F1F4F6;
+  padding: 10px 40px 10px 15px;
+  margin-bottom: 16px;
+  max-width: 530px;
+  width: fit-content;
+  position: relative;
+
+  .time {
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  &.own {
+    margin-left: auto;
+    background: var(--ant-color-primary);
+    color: #fff;
+  }
+}

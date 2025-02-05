@@ -1,21 +1,32 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./services/auth/authSlice";
+import { sharebookApi } from "./services/api/sharebookApi";
+import { chatReducer } from "./pages/chat/chatSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
-import { authReducer } from "./pages/auth/authSlice.tsx";
-import { sharebookApi } from "./api/sharebookApi.ts";
 
-export const store = configureStore({
-  reducer: {
-    [sharebookApi.reducerPath]: sharebookApi.reducer,
-    auth: authReducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sharebookApi.middleware),
+const rootReducer = combineReducers({
+  [sharebookApi.reducerPath]: sharebookApi.reducer,
+  auth: authReducer,
+  chat: chatReducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = ReturnType<typeof setupStore>["dispatch"];
+
+export function setupStore(preloadedState?: Partial<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        // Чтобы Redux не ругался на несериализуемый refreshPromise
+        serializableCheck: {
+          ignoredActions: ["auth/startRefresh", "auth/finishRefresh"],
+          ignoredPaths: ["auth.refreshPromise"],
+        },
+      }).concat(sharebookApi.middleware),
+  });
+}
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();

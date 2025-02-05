@@ -1,8 +1,8 @@
 {
-  "schemaFile": "./api-docs.json",
-  "apiFile": "./src/api/emptyApi.ts",
+  "schemaFile": "https://194.67.125.199:8443/v3/api-docs",
+  "apiFile": "./src/services/api/emptyApi.ts",
   "apiImport": "emptySplitApi",
-  "outputFile": "./src/api/sharebookApi.ts",
+  "outputFile": "./src/services/api/sharebookApi.ts",
   "exportName": "sharebookApi",
   "hooks": true
 }

@@ -1,0 +1,89 @@
+.userListWrapper {
+  width: 420px;
+  border-right: 1px solid #9E9E9E33;
+  display: flex;
+  flex-direction: column;
+
+  & > div:nth-child(2) {
+    flex: 1;
+    overflow: auto;
+    scrollbar-gutter: stable;
+  }
+}
+
+.userListTitle {
+  line-height: 75px;
+  padding: 0 24px 0 36px;
+  margin: calc(-1 * var(--ant-padding-sm)) 0;
+}
+
+.userListItem {
+  margin: 0 24px;
+  border-radius: 12px;
+  align-items: stretch !important;
+  cursor: pointer;
+
+  &.active {
+    background: rgb(241, 244, 246);
+  }
+
+  &:hover {
+    background: rgba(241, 244, 246, 0.7);
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 12px;
+  width: 66px;
+  height: 66px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.authorName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.bookTitle {
+  color: #909090;
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
+}
+
+.bookName {
+  color: var(--ant-color-primary);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.time {
+  color: #909090;
+}
+
+.unreadCount {
+  border-radius: 50%;
+  background: var(--ant-color-primary);
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}

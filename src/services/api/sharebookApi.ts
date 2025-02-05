@@ -188,7 +188,9 @@ const injectedRtkApi = api.injectEndpoints({
       query: (queryArg) => ({
         url: `/refresh`,
         method: "POST",
-        body: queryArg.refreshRequest,
+        cookies: {
+          "refresh-token": queryArg["refresh-token"],
+        },
       }),
     }),
     auth: build.mutation<AuthApiResponse, AuthApiArg>({
@@ -232,6 +234,9 @@ const injectedRtkApi = api.injectEndpoints({
           token: queryArg.token,
         },
       }),
+    }),
+    generateLogin: build.query<GenerateLoginApiResponse, GenerateLoginApiArg>({
+      query: () => ({ url: `/generate-login` }),
     }),
     searchWithFilters: build.query<
       SearchWithFiltersApiResponse,
@@ -315,7 +320,7 @@ export type DeleteForEveryoneMessageApiArg = {
   messageId: number;
 };
 export type BookListApiResponse =
-  /** status 200 Возвращает список книг */ string;
+  /** status 200 Возвращает список книг */ BookModelDto[];
 export type BookListApiArg = void;
 export type SaveBookApiResponse =
   /** status 201 Возвращает сохраненную книгу */ BookModelDto;
@@ -335,15 +340,18 @@ export type DeleteAttachmentApiArg = {
   bookId: number;
 };
 export type GetCorrespondenceApiResponse =
-  /** status 200 Возвращает список сообщений */ string;
+  /** status 200 Возвращает список сообщений */ MessageDto[];
 export type GetCorrespondenceApiArg = {
+  /** Идентификатор первого пользователя */
   firstUserId: string;
+  /** Идентификатор второго пользователя */
   secondUserId: string;
   zone: number;
 };
 export type CreateCorrespondenceApiResponse =
   /** status 201 Чат создан */ UsersCorrKeyDto;
 export type CreateCorrespondenceApiArg = {
+  /** Идентификатор пользователя */
   userId: string;
 };
 export type DeleteCorrespondenceApiResponse = unknown;
@@ -352,10 +360,10 @@ export type DeleteCorrespondenceApiArg = {
   userId: string;
 };
 export type GetAllApiResponse =
-  /** status 200 Возвращает список закладок */ string;
+  /** status 200 Возвращает список закладок */ BookModelDto[];
 export type GetAllApiArg = void;
 export type SaveBookmarksApiResponse =
-  /** status 201 Возвращает список закладок */ string;
+  /** status 201 Возвращает список закладок */ BookModelDto[];
 export type SaveBookmarksApiArg = {
   /** Идентификатор книги */
   bookId: number;
@@ -382,7 +390,7 @@ export type RegisterUserApiArg = {
 export type RefreshApiResponse =
   /** status 200 Возвращает токены */ AuthResponse;
 export type RefreshApiArg = {
-  refreshRequest: RefreshRequest;
+  "refresh-token": string;
 };
 export type AuthApiResponse = /** status 200 Возвращает токены */ AuthResponse;
 export type AuthApiArg = {
@@ -397,7 +405,7 @@ export type LockedUserApiArg = {
   lockedUserDto: LockedUserDto;
 };
 export type GetAllProfileApiResponse =
-  /** status 200 Возвращает найденных пользователей */ string;
+  /** status 200 Возвращает найденных пользователей */ UserPublicProfileDto[];
 export type GetAllProfileApiArg = {
   zone: number;
 };
@@ -406,13 +414,16 @@ export type MailConfirmApiResponse =
 export type MailConfirmApiArg = {
   token: string;
 };
+export type GenerateLoginApiResponse =
+  /** status 200 Уникальный на данный момент логин */ OriginalLoginResponse;
+export type GenerateLoginApiArg = void;
 export type SearchWithFiltersApiResponse =
-  /** status 200 Возвращает найденные книги */ string;
+  /** status 200 Возвращает найденные книги */ BookModelDto[];
 export type SearchWithFiltersApiArg = {
   filters: BookFiltersRequest;
 };
 export type SearchByTitleApiResponse =
-  /** status 200 Возвращает найденные книги */ string;
+  /** status 200 Возвращает найденные книги */ BookModelDto[];
 export type SearchByTitleApiArg = {
   title: string;
 };
@@ -421,10 +432,11 @@ export type BookInfoApiResponse =
 export type BookInfoApiArg = {
   bookId: number;
 };
-export type BooksApiResponse = /** status 200 Возвращает все книги */ string;
+export type BooksApiResponse =
+  /** status 200 Возвращает все книги */ BookModelDto[];
 export type BooksApiArg = void;
 export type UserListApiResponse =
-  /** status 200 Возвращает список пользователей */ string;
+  /** status 200 Возвращает список пользователей */ InfoUsersDto[];
 export type UserListApiArg = {
   /** Часовой пояс */
   zone: number;
@@ -564,12 +576,6 @@ export type UserRegistrationDto = {
 export type AuthResponse = {
   /** Токен доступа */
   accessToken?: string;
-  /** Токен обновления */
-  refreshToken?: string;
-};
-export type RefreshRequest = {
-  /** Токен обновления */
-  refresh: string;
 };
 export type LoginRequest = {
   /** Логин */
@@ -585,6 +591,22 @@ export type LockedUserDto = {
   /** Комментарий */
   comment: string;
 };
+export type UserPublicProfileDto = {
+  /** Идентификатор */
+  userId?: string;
+  /** Имя */
+  name?: string;
+  /** Город */
+  city?: string;
+  /** Время последнего входа */
+  loginDate?: string;
+  /** Книги пользователя */
+  books?: BookModelDto[];
+};
+export type OriginalLoginResponse = {
+  /** Уникальный логин */
+  originalLogin?: string;
+};
 export type BookFiltersRequest = {
   /** Город */
   city?: string;
@@ -598,6 +620,24 @@ export type BookFiltersRequest = {
   publishingHouse?: string;
   /** Год издания */
   year?: number;
+};
+export type InfoUsersDto = {
+  /** Идентификатор */
+  userId?: number;
+  /** Имя */
+  name?: string;
+  /** Логин */
+  login?: string;
+  /** Почта */
+  email?: string;
+  /** Город */
+  city?: string;
+  /** Заблокирован ли аккаунт */
+  accountNonLocked?: boolean;
+  /** Активирован ли аккаунт */
+  enabled?: boolean;
+  /** Время последнего входа */
+  loginDate?: string;
 };
 export const {
   useGetProfileQuery,
@@ -625,6 +665,7 @@ export const {
   useLockedUserMutation,
   useGetAllProfileQuery,
   useMailConfirmQuery,
+  useGenerateLoginQuery,
   useSearchWithFiltersQuery,
   useSearchByTitleQuery,
   useBookInfoQuery,

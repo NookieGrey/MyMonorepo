@@ -18,6 +18,9 @@ export const antdThemeConfig: ThemeConfig = {
       controlHeight: 42,
       borderRadius: 9,
     },
+    List: {
+      itemPadding: "12px",
+    },
     Input: {
       colorText: "#000000",
       activeBorderColor: "rgba(42, 127, 255, 80)",

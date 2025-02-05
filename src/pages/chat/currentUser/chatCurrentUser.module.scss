@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(30px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.blank {
+  flex: 1;
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-right: 12px;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.authorName {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.bookTitle {
+  color: #909090;
+  font-size: 14px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  overflow-y: hidden;
+}
+
+.dropdownButton {
+  line-height: 0;
+  border: none;
+  box-shadow: none;
+  background: none;
+  cursor: pointer;
+  padding: 12px;
+  margin: 0 24px;
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  margin: -6px -10px;
+
+  svg {
+    margin-right: 10px;
+    stroke: #FF2A2A;
+  }
+
+  &:hover {
+    svg {
+      stroke: #fff;
+    }
+  }
+}
