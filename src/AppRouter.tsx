@@ -5,6 +5,8 @@ import { Auth } from "./pages/auth";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
 import { Chat } from "./pages/chat/Chat.tsx";
+import { Profile } from "./pages/profile/Profile.tsx";
+import { User } from "./pages/user/User.tsx";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
@@ -19,6 +21,8 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/chats" element={<Chat />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user/:userId" element={<User />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
       </Routes>
     </Router>
