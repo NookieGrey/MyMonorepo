@@ -1,4 +1,14 @@
+.modal {
+  height: 498px;
+  padding: 20px 20px !important;
+}
+
+.containerModal {
+  height: 100%;
+}
+
 .wrapper {
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -14,15 +24,12 @@
 
   background: rgba(241, 244, 246, 1);
   border: none;
+  cursor: pointer;
 }
 
-.wrapperAuth {
-  max-width: 1400px;
-  padding: 50px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.signUp {
+  display: grid;
+  grid-template-rows: 40px auto 40px;
 }
 
 .title {
@@ -50,9 +57,31 @@
 .link {
   font-family: 'Onest-Medium', sans-serif;
   font-size: 15px;
-  margin-top: 40px;
+  margin-top: 24px;
 
   a {
     color: var(--ant-color-primary)
   }
+}
+
+.containerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.legalText {
+  display: flex;
+  justify-content: center;
+
+  max-width: 527px;
+  height: 100%;
+  margin-bottom: 10px;
+
+  font-family: 'Onest-Regular', sans-serif;
+  line-height: 20.4px;
+  font-size: 16px;
+  color: var(--ant-color-text-placeholder);
+  text-align: center;
 }

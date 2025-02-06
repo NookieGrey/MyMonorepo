@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes, StaticRouter } from "react-router";
 import { Home } from "./pages/home/Home.tsx";
 import { HeaderComponent } from "./components/Header";
-import { Auth } from "./pages/auth";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
 import { Chat } from "./pages/chat/Chat.tsx";
@@ -15,7 +14,6 @@ export function AppRouter({ location }: { location: string }) {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/filter/:genre" element={<Home />} />
-        <Route path="" element={<Auth />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/chats" element={<Chat />} />

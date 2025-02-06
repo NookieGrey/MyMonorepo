@@ -13,7 +13,7 @@ export function Avatar() {
         className={styles.avatar}
         type="primary"
         shape="circle"
-        onClick={() => setSearchParams({ auth: "open" })}
+        onClick={() => setSearchParams({ auth: "signIn" })}
       >
         <SvgAvatar />
         <Auth />
