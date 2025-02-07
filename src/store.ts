@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = ReturnType<typeof setupStore>["dispatch"];
+export type AppStore = ReturnType<typeof setupStore>;
 
 export function setupStore(preloadedState?: Partial<RootState>) {
   return configureStore({
