@@ -16,9 +16,8 @@ export function User() {
 
   console.log(data);
   return (
-    <UserComponent
-      data={user}
-      children={<Button type="primary">Написать</Button>}
-    />
+    <UserComponent data={user}>
+      <Button type="primary">Написать</Button>
+    </UserComponent>
   );
 }
