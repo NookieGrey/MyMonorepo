@@ -1,3 +1,7 @@
+body {
+	margin: 0;
+}
+
 @font-face {
   font-family: "Literata-Medium";
   src: url("./fonts/Literata-Medium.woff") format("woff");

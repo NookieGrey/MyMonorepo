@@ -7,7 +7,7 @@
 .containerGenres {
   display: flex;
   font-family: "Onest-Medium", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .buttonGenre {
@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
 
-  height: 40px;
+  height: 38px;
   padding-left: 25px;
   padding-right: 25px;
   border-radius: 11px;
@@ -29,11 +29,12 @@
 
   &:hover {
     transition: 0.2s all ease;
-    color: var(--ant-color-text-base);
+    color: var(--ant-color-primary);
   }
 }
 
 .buttonActive {
+  font-size: 16px;
   pointer-events: none;
   background: var(--ant-color-primary);
   color: #ffffff;
@@ -42,12 +43,12 @@
 .buttonTypeFilter {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
-  gap: 66px;
+  gap: 9px;
   min-width: 159px;
-  padding: 0 21px 0;
-  height: 40px;
+  padding: 0 9px 0 12px;
+  height: 38px;
   border-radius: 11px;
 
   cursor: pointer;
@@ -66,8 +67,8 @@
 }
 
 .typeFilter {
-  backdrop-filter: blur(50px);
   ul {
-    margin-top: 2px !important;
+    backdrop-filter: blur(50px);
+    margin-top: 6px !important;
   }
 }
