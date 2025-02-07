@@ -1,12 +1,13 @@
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import styles from "../auth.module.scss";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useRegisterUserMutation } from "../../../services/api/sharebookApi.ts";
 import { SvgPasswordShow } from "../svg/SvgPasswordShow.tsx";
 import { SvgPasswordHide } from "../svg/SvgPasswordHide.tsx";
 
-export function SignUpFormPassword() {
+export function SignUpPassword() {
+  const [, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [register, { isLoading }] = useRegisterUserMutation();

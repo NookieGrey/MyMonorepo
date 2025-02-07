@@ -2,7 +2,6 @@ import styles from "../header.module.scss";
 import { Button } from "antd";
 import { SvgAvatar } from "../svg/SvgAvatar.tsx";
 import { useSearchParams } from "react-router";
-import { Auth } from "../../../pages/auth";
 
 export function Avatar() {
   const [, setSearchParams] = useSearchParams();
@@ -16,7 +15,6 @@ export function Avatar() {
         onClick={() => setSearchParams({ auth: "signIn" })}
       >
         <SvgAvatar />
-        <Auth />
       </Button>
     </>
   );
