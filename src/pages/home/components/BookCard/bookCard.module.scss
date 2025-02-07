@@ -1,17 +1,22 @@
+.cover {
+  margin: 0 !important;
+}
+
 .container {
   margin-top: 30px;
 
   display: grid;
-  grid-template-columns: repeat(5, auto);
+  grid-template-columns: repeat(5, 242px);
   gap: 30px;
 }
 
 .containerImage {
-  width: 202px !important;
-  height: 304px;
+  height: 324px;
   padding: 20px 20px 0;
 
   img {
+    max-width: 100%;
+    object-fit: contain;
     height: 304px;
   }
 }

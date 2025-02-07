@@ -7,19 +7,22 @@
 }
 
 .container {
-  max-width: 1330px;
+  max-width: 1400px;
   display: flex;
   align-items: center;
   flex: 1;
   padding: 0 35px 0;
 
-  font-family: "Onest-Regular", sans-serif;
-  font-size: 15px;
+  font-family: "Onest-Medium", sans-serif;
+  font-size: 16px;
 }
 
 .logo {
-  margin-bottom: 2px;
   line-height: 0;
+
+  svg {
+    height: 23px;
+  }
 }
 
 .navBar {
@@ -27,7 +30,6 @@
   justify-content: center;
   list-style: none;
   margin: 0;
-
   padding: 0 40px 0;
   gap: 30px;
 
@@ -41,7 +43,6 @@
   }
 
   .activeMenuItem {
-    font-family: "Onest-Medium", sans-serif;
     color: var(--ant-color-text-base);
   }
 }
@@ -51,38 +52,29 @@
 }
 
 .containerSearch {
-  width: 403px;
+  width: 424px;
 }
 
 .miniContainerSearch {
-  width: 395px;
+  width: 400px;
   display: flex;
   align-items: center;
-
-  svg {
-    position: relative;
-    left: -30px;
-    pointer-events: none;
-  }
 }
 
 .search {
-  width: 378px;
-  height: 36px;
-  padding-left: 15px;
   border-radius: 38px;
+}
 
-  background: #f1f4f6;
-  outline: none;
-  border: none;
+.svgSearch {
+  transition: .2s;
+}
 
-  &::placeholder {
-    color: var(--ant-color-text-placeholder);
-  }
+.svgSearchFocus {
+  stroke: var(--ant-color-primary);
 }
 
 .avatar {
-  max-width: 36px;
-  min-width: 36px !important;
-  height: 36px;
+  max-width: 38px;
+  min-width: 38px !important;
+  height: 38px;
 }

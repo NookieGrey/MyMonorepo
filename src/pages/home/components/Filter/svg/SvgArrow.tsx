@@ -8,16 +8,16 @@ export function SvgArrow({ showListState }: { showListState: boolean }) {
           ? `${styles.svgDefault} ${styles.svgActive}`
           : styles.svgDefault
       }
-      width="20"
-      height="16"
+      width="18"
+      height="18"
       fill="none"
     >
       <path
         stroke="#2A7FFF"
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="1.667"
-        d="m5 5.5 5 5 5-5"
+        strokeWidth="1.5"
+        d="M13.5 6.75 9 11.25l-4.5-4.5"
       />
     </svg>
   );

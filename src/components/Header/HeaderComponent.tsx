@@ -1,7 +1,7 @@
 import styles from "./header.module.scss";
 import { Logo } from "./components/Logo.tsx";
 import { Nav } from "./components/Nav.tsx";
-import { Search } from "./components/Search.tsx";
+import { SearchInput } from "./components/SearchInput.tsx";
 import { Avatar } from "./components/Avatar.tsx";
 
 export function HeaderComponent() {
@@ -11,7 +11,7 @@ export function HeaderComponent() {
         <Logo />
         <Nav />
         <div className={styles.blank}></div>
-        <Search />
+        <SearchInput />
         <Avatar />
       </div>
     </header>
