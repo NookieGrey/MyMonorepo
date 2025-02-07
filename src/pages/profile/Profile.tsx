@@ -1,25 +1,23 @@
-import styles from "./profile.module.scss";
 import { useGetProfileQuery } from "../../services/api/sharebookApi.ts";
-import { Button } from "antd";
-import photo from "./nikolay.png";
-import { UserComponent } from "../../components/UserComponent/UserComponent.tsx";
-
-const user = {
-  userId: "userId",
-  name: "Николай Андер",
-  photo,
-};
+import { ProfileInfo } from "./info";
+import { useParams } from "react-router";
+import { ProfileOwnButtons } from "./ownButtons";
+import { ProfileOtherButtons } from "./otherButtons";
 
 export function Profile() {
-  const { data } = useGetProfileQuery({ userId: "-1", zone: 1 });
+  let { userId } = useParams();
 
-  console.log(data);
+  if (userId === "0" || userId === "my" || !userId || !isFinite(+userId)) {
+    userId = "-1";
+  }
+
+  const isOwnProfile = userId === "-1";
+
+  const { data } = useGetProfileQuery({ userId, zone: 1 });
+
   return (
-    <UserComponent data={user}>
-      <>
-        <Button className={styles.settingsButton}>⚙️</Button>
-        <Button type="primary">Новое объявление</Button>
-      </>
-    </UserComponent>
+    <ProfileInfo profile={data} isOwnProfile={isOwnProfile}>
+      {isOwnProfile ? <ProfileOwnButtons /> : <ProfileOtherButtons />}
+    </ProfileInfo>
   );
 }
