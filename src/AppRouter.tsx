@@ -6,16 +6,30 @@ import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
 import { Chat } from "./pages/chat/Chat.tsx";
 import { Profile } from "./pages/profile";
+import {
+  useFindAllGenreQuery,
+  useGetProfileQuery,
+} from "./services/api/sharebookApi.ts";
+import { useTranslation } from "react-i18next";
+import { Genre } from "./pages/genre";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
 export function AppRouter({ location }: { location: string }) {
+  const { i18n } = useTranslation();
+
+  useFindAllGenreQuery({ locale: i18n.language.split("-")[0] });
+  useGetProfileQuery({
+    userId: "-1",
+    zone: new Date().getTimezoneOffset() / -60,
+  });
+
   return (
     <Router location={location}>
       <HeaderComponent />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/filter/:genre" element={<Home />} />
+        <Route path="/genre/:genreId" element={<Genre />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />

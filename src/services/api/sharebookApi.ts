@@ -239,7 +239,12 @@ const injectedRtkApi = api.injectEndpoints({
       }),
     }),
     findAllGenre: build.query<FindAllGenreApiResponse, FindAllGenreApiArg>({
-      query: () => ({ url: `/genre` }),
+      query: (queryArg) => ({
+        url: `/genre`,
+        params: {
+          locale: queryArg.locale,
+        },
+      }),
     }),
     generateLogin: build.query<GenerateLoginApiResponse, GenerateLoginApiArg>({
       query: () => ({ url: `/generate-login` }),
@@ -430,7 +435,9 @@ export type MailConfirmApiArg = {
 };
 export type FindAllGenreApiResponse =
   /** status 200 Список жанров */ GenreDto[];
-export type FindAllGenreApiArg = void;
+export type FindAllGenreApiArg = {
+  locale: string;
+};
 export type GenerateLoginApiResponse =
   /** status 200 Уникальный на данный момент логин */ OriginalLoginResponse;
 export type GenerateLoginApiArg = void;
@@ -623,8 +630,7 @@ export type UserPublicProfileDto = {
 };
 export type GenreDto = {
   id?: number;
-  ruName?: string;
-  engName?: string;
+  name?: string;
 };
 export type OriginalLoginResponse = {
   /** Уникальный логин */
