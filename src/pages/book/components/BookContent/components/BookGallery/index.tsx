@@ -12,22 +12,25 @@ export const BookGallery = ({ mainImage, thumbnails }: BookGalleryProps) => {
 
   return (
     <div className={styles.galleryContainer}>
-      <div className={styles.mainImageWrapper}>
-        <Image
-          src={mainImage}
-          alt="Обложка книги"
-          className={styles.mainImage}
-          preview={false}
-        />
-      </div>
+      <Image
+        width={315}
+        className={styles.mainImage}
+        preview={false}
+        src={mainImage}
+        alt="Обложка книги"
+      />
 
       <div className={styles.thumbnailsContainer}>
         {visibleThumbnails.map((thumbnail, index) => (
-          <div
-            key={index}
-            className={`${styles.thumbnail} ${index === 3 && additionalCount > 0 ? styles.blurred : ""}`}
-          >
-            <img src={thumbnail} alt={`Изображение книги ${index + 1}`} />
+          <div key={index} className={styles.relative}>
+            <Image
+              width={72}
+              height={72}
+              className={styles.thumbnailImage}
+              preview={false}
+              src={thumbnail}
+              alt={`Изображение книги ${index + 1}`}
+            />
             {index === 3 && additionalCount > 0 && (
               <div className={styles.overlay}>
                 <span>+{additionalCount}</span>

@@ -8,14 +8,16 @@ import {
   finishRefresh,
   logout,
   setAccessToken,
+  setReturnCookie,
   startRefresh,
 } from "./authSlice";
 import type { RootState } from "../../store";
 
+// const baseUrl =  import.meta.env.PROD ? "https://194.67.125.199:8443/" : "https://frontend-wmyr.onrender.com/"
 // Исходный fetchBaseQuery
 const rawBaseQuery = fetchBaseQuery({
   mode: "cors",
-  baseUrl: "https://194.67.125.199:8443/",
+  baseUrl: "https://frontend-wmyr.onrender.com/api/",
   credentials: "include",
   prepareHeaders: (headers, api) => {
     const state = api.getState() as RootState;
@@ -23,6 +25,16 @@ const rawBaseQuery = fetchBaseQuery({
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
+
+    if (import.meta.env.SSR) {
+      // Пример: берем куки из extraOptions (если передали)
+      const cookie = state.auth.refreshCookie;
+
+      if (cookie) {
+        headers.set("Cookie", cookie);
+      }
+    }
+
     return headers;
   },
 });
@@ -54,6 +66,13 @@ export const baseQueryWithReauth: BaseQueryFn<
           const newToken = (refreshResp.data as { accessToken: string })
             .accessToken;
           dispatch(setAccessToken(newToken));
+          if (import.meta.env.SSR) {
+            dispatch(
+              setReturnCookie(
+                refreshResp.meta?.response?.headers.getSetCookie()[0] ?? null,
+              ),
+            );
+          }
           return newToken;
         } else {
           dispatch(logout());

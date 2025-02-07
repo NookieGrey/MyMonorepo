@@ -168,7 +168,10 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
-    sendMessage1: build.mutation<SendMessage1ApiResponse, SendMessage1ApiArg>({
+    sendResetPasswordEmail: build.mutation<
+      SendResetPasswordEmailApiResponse,
+      SendResetPasswordEmailApiArg
+    >({
       query: (queryArg) => ({
         url: `/reset/send`,
         method: "POST",
@@ -235,6 +238,9 @@ const injectedRtkApi = api.injectEndpoints({
         },
       }),
     }),
+    findAllGenre: build.query<FindAllGenreApiResponse, FindAllGenreApiArg>({
+      query: () => ({ url: `/genre` }),
+    }),
     generateLogin: build.query<GenerateLoginApiResponse, GenerateLoginApiArg>({
       query: () => ({ url: `/generate-login` }),
     }),
@@ -262,6 +268,14 @@ const injectedRtkApi = api.injectEndpoints({
         url: `/books/info`,
         params: {
           bookId: queryArg.bookId,
+        },
+      }),
+    }),
+    booksByUser: build.query<BooksByUserApiResponse, BooksByUserApiArg>({
+      query: (queryArg) => ({
+        url: `/books/by-user`,
+        params: {
+          id: queryArg.id,
         },
       }),
     }),
@@ -378,8 +392,8 @@ export type UpdatePasswordApiArg = {
   token: string;
   userPasswordDto: UserPasswordDto;
 };
-export type SendMessage1ApiResponse = unknown;
-export type SendMessage1ApiArg = {
+export type SendResetPasswordEmailApiResponse = unknown;
+export type SendResetPasswordEmailApiArg = {
   email: string;
 };
 export type RegisterUserApiResponse =
@@ -414,6 +428,9 @@ export type MailConfirmApiResponse =
 export type MailConfirmApiArg = {
   token: string;
 };
+export type FindAllGenreApiResponse =
+  /** status 200 Список жанров */ GenreDto[];
+export type FindAllGenreApiArg = void;
 export type GenerateLoginApiResponse =
   /** status 200 Уникальный на данный момент логин */ OriginalLoginResponse;
 export type GenerateLoginApiArg = void;
@@ -432,6 +449,11 @@ export type BookInfoApiResponse =
 export type BookInfoApiArg = {
   bookId: number;
 };
+export type BooksByUserApiResponse =
+  /** status 200 Возвращает все книги пользователя */ BookModelDto[];
+export type BooksByUserApiArg = {
+  id: string;
+};
 export type BooksApiResponse =
   /** status 200 Возвращает все книги */ BookModelDto[];
 export type BooksApiArg = void;
@@ -448,26 +470,6 @@ export type DeleteForMeMessageApiArg = {
 export type NewErrorBody = {
   message?: string;
 };
-export type AttachmentDto = {
-  attachId?: number;
-  data?: string[];
-  expansion?: string;
-};
-export type BookModelDto = {
-  /** Название */
-  title: string;
-  /** Автор */
-  author: string;
-  /** Жанр */
-  genre?: string;
-  /** Издательство */
-  publishingHouse?: string;
-  /** Год издания */
-  year?: number;
-  /** Идентификатор */
-  bookId?: number;
-  attachment?: AttachmentDto;
-};
 export type UserProfileDto = {
   /** Идентификатор */
   userId?: number;
@@ -479,8 +481,6 @@ export type UserProfileDto = {
   city?: string;
   /** Почтовый адрес */
   email?: string;
-  /** Книги пользователя */
-  books?: BookModelDto[];
 };
 export type UserPutProfileDto = {
   /** Имя */
@@ -518,13 +518,33 @@ export type MessageRequest = {
   /** Текст сообщения */
   text: string;
 };
+export type AttachmentDto = {
+  attachId?: number;
+  data?: string[];
+  expansion?: string;
+};
+export type BookModelDto = {
+  /** Название */
+  title: string;
+  /** Автор */
+  author: string;
+  /** Идентификатор жанра */
+  genre?: number;
+  /** Издательство */
+  publishingHouse?: string;
+  /** Год издания */
+  year?: number;
+  /** Идентификатор */
+  bookId?: number;
+  attachment?: AttachmentDto;
+};
 export type BookDto = {
   /** Название */
   title: string;
   /** Автор */
   author: string;
-  /** Жанр */
-  genre?: string;
+  /** Идентификатор жанра */
+  genre?: number;
   /** Издательство */
   publishingHouse?: string;
   /** Год издания */
@@ -600,8 +620,11 @@ export type UserPublicProfileDto = {
   city?: string;
   /** Время последнего входа */
   loginDate?: string;
-  /** Книги пользователя */
-  books?: BookModelDto[];
+};
+export type GenreDto = {
+  id?: number;
+  ruName?: string;
+  engName?: string;
 };
 export type OriginalLoginResponse = {
   /** Уникальный логин */
@@ -614,8 +637,8 @@ export type BookFiltersRequest = {
   title?: string;
   /** Автор */
   author?: string;
-  /** Жанр */
-  genre?: string;
+  /** Идентификатор жанра */
+  genre?: number;
   /** Издательство */
   publishingHouse?: string;
   /** Год издания */
@@ -657,7 +680,7 @@ export const {
   useSaveBookmarksMutation,
   useDeleteBookmarksMutation,
   useUpdatePasswordMutation,
-  useSendMessage1Mutation,
+  useSendResetPasswordEmailMutation,
   useRegisterUserMutation,
   useRefreshMutation,
   useAuthMutation,
@@ -665,10 +688,12 @@ export const {
   useLockedUserMutation,
   useGetAllProfileQuery,
   useMailConfirmQuery,
+  useFindAllGenreQuery,
   useGenerateLoginQuery,
   useSearchWithFiltersQuery,
   useSearchByTitleQuery,
   useBookInfoQuery,
+  useBooksByUserQuery,
   useBooksQuery,
   useUserListQuery,
   useDeleteForMeMessageMutation,
