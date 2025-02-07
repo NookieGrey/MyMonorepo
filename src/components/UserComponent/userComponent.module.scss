@@ -1,0 +1,46 @@
+.wrapper {
+    background: linear-gradient(180deg, #DFECFF 68.5%, #FFFFFF 100%);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 50px 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    gap: 25px;
+}
+
+h2.name {
+    margin-bottom: 5px;
+}
+
+.text {
+    max-width: 450px;
+}
+
+.score {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.emoji {
+    font-size: 24px;
+}
+
+div.description {
+    font-family: Literata;
+    font-size: 19px;
+    margin-top: 15px;
+    line-height: 1.1;
+    color: #303030;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
