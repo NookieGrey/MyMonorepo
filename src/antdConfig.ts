@@ -50,5 +50,15 @@ export const antdThemeConfig: ThemeConfig = {
       boxShadowTertiary: "0px 2px 7px rgba(42, 127, 255, 80)",
       colorBgContainer: "#FFFFFF",
     },
+    Drawer: {
+      footerPaddingInline: 0,
+      footerPaddingBlock: 0,
+    },
+    Collapse: {
+      headerBg: "transparent",
+      contentBg: "transparent",
+      headerPadding: "16px 0",
+      contentPadding: "0",
+    },
   },
 };

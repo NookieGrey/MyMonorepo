@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Genre } from "./pages/genre";
 import { Auth } from "./pages/auth";
+import { Search } from "./pages/search";
 
 const Router = import.meta.env.SSR ? StaticRouter : BrowserRouter;
 
@@ -30,6 +31,7 @@ export function AppRouter({ location }: { location: string }) {
       <Routes>
         <Route index element={<Home />} />
         <Route path="/genre/:genreId" element={<Genre />} />
+        <Route path="/search/:title?" element={<Search />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/chats" element={<Chat />} />

@@ -20,7 +20,7 @@ const mainSlice = createSlice({
         const genreMap: Record<string, GenreDto> = {};
 
         payload.forEach((item) => {
-          if (item.id && item.name) {
+          if (item.id !== undefined && item.name !== undefined) {
             genreMap[item.id] = item;
           }
         });

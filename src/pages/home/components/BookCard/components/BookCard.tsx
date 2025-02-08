@@ -33,9 +33,9 @@ export function BookCard({ book }: { book: BookDto }) {
           <div className={styles.title}>{book.title}</div>
           <a className={styles.author}>{book.author}</a>
         </div>
-        {!!book.genre && (
-            <p className={styles.location}>{genreMap[book.genre].name}</p>
-          )}
+        {book.genre !== undefined && !!genreMap[book.genre] && (
+          <p className={styles.location}>{genreMap[book.genre].name}</p>
+        )}
       </div>
     </Card>
   );
