@@ -24,6 +24,7 @@ export const ShareButton = () => (
     menu={shareMenu}
     trigger={["click"]}
     overlayClassName={styles.shareDropdown}
+    placement="bottomRight"
   >
     <Button
       type="text"

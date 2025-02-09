@@ -1,31 +1,64 @@
 .shareButton {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  &:global(.ant-btn-text.ant-btn-color-default) {
+    padding: 0;
+    width: auto;
+    height: auto;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-  font-family: "Onest", sans-serif;
-  line-height: 20px;
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--ant-color-text);
-  :global(.ant-btn-icon) {
-    font-size: 19px;
+    &:hover {
+      background: transparent;
+
+      .anticon svg {
+        fill: var(--ant-color-primary-hover);
+      }
+
+      span:last-child {
+        color: var(--ant-color-primary-hover);
+      }
+    }
+
+    .anticon svg {
+      width: 19px;
+      height: 19px;
+      fill: var(--ant-color-text);
+    }
+
+    span:last-child {
+      font-family: "Onest", sans-serif;
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 400;
+      color: var(--ant-color-text);
+    }
   }
 }
 
 .shareDropdown {
   :global(.ant-dropdown-menu) {
-    padding: 4px;
+    padding: 0;
     width: 170px;
-    background: var(--ant-color-bg-base);
+    background: var(--ant-color-white);
     box-shadow: 0px 7px 22px rgba(0, 0, 0, 0.25);
     border-radius: 9px;
   }
 
   :global(.ant-dropdown-menu-item) {
+    padding: 10px;
+    height: 35px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    border-radius: 6px;
+    margin: 4px;
+
+    &:hover {
+      background: var(--ant-button-default-bg);
+      margin-right: 0;
+      padding-right: 14px;
+    }
 
     svg {
       width: 18px;
@@ -34,8 +67,8 @@
 
     span {
       font-family: "Onest", sans-serif;
-      font-size: 15px;
-      line-height: 19px;
+      font-size: 14px;
+      line-height: 18px;
       font-weight: 400;
       color: var(--ant-color-text);
       width: 114px;
