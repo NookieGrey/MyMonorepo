@@ -7,7 +7,7 @@
 
 .annotation {
   :global(h3.ant-typography) {
-    margin-bottom: 15px;
+    margin: 10px 0 15px;
     font-family: "Onest", sans-serif;
     font-weight: 600;
     font-size: 24px;
@@ -16,7 +16,7 @@
   }
 
   .annotationText {
-    font-family: "Literata", serif; // Нужно добавить этот шрифт
+    font-family: "Literata", serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 135%;
@@ -30,7 +30,6 @@
     border: none;
     background: none;
     padding: 0;
-    margin-left: 8px;
   }
 }
 
@@ -43,17 +42,19 @@
 .detailItem {
   display: flex;
   gap: 40px;
-  font-size: 16px;
-  line-height: 20px;
-  font-family: "Onest", sans-serif;
+
+  :global(.ant-typography) {
+    font-family: "Onest", sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+  }
 
   .label {
-    width: 107px;
-    color: var(--color-text-author);
+    width: 97px;
+    color: var(--ant-color-text-placeholder);
   }
 
   .value {
-    width: 142px;
     color: var(--ant-color-text);
   }
 }

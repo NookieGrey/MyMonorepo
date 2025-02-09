@@ -9,13 +9,13 @@ export const XIcon = () => (
     <path
       d="M12.6148 16.0763L2.81486 3.47627C2.58496 3.18069 2.7956 2.75 3.17007 2.75H5.0299C5.16876 2.75 5.29985 2.81411 5.3851 2.92373L15.1851 15.5237C15.415 15.8194 15.2044 16.25 14.8299 16.25H12.9701C12.8312 16.25 12.7001 16.1859 12.6148 16.0763Z"
       stroke="black"
-      stroke-width="1.5"
+      strokeWidth="1.5"
     />
     <path
       d="M15 2.75L3 16.25"
       stroke="black"
-      stroke-width="1.5"
-      stroke-linecap="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
     />
   </svg>
 );
@@ -31,9 +31,9 @@ export const TelegramIcon = () => (
     <path
       d="M15.75 4.25L1.5 9.875L6.75 10.625M15.75 4.25L13.875 15.5L6.75 10.625M15.75 4.25L6.75 10.625M6.75 10.625V14.75L9.1866 12.2922"
       stroke="black"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -61,18 +61,18 @@ export const EmailIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clip-path="url(#clip0_537_567)">
+    <g clipPath="url(#clip0_537_567)">
       <path
         d="M6.41675 8.75L11.0001 11.9583L15.5834 8.75"
         stroke="black"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M1.83325 16.0834V6.91671C1.83325 5.90418 2.65406 5.08337 3.66659 5.08337H18.3333C19.3458 5.08337 20.1666 5.90418 20.1666 6.91671V16.0834C20.1666 17.0959 19.3458 17.9167 18.3333 17.9167H3.66659C2.65406 17.9167 1.83325 17.0959 1.83325 16.0834Z"
         stroke="black"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
     </g>
     <defs>
@@ -99,16 +99,16 @@ export const LinkIcon = () => (
     <path
       d="M10.5 9.4982C10.5 7.62942 8.76225 5.75 6.64285 5.75C6.39181 5.75 5.56428 5.75001 5.35714 5.75001C3.2269 5.75001 1.5 7.42814 1.5 9.4982C1.5 11.282 2.7823 12.7748 4.5 13.1536C4.77567 13.2144 5.06254 13.2464 5.35714 13.2464"
       stroke="black"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M7.5 9.49821C7.5 11.367 9.23775 13.2464 11.3572 13.2464C11.6082 13.2464 12.4357 13.2464 12.6428 13.2464C14.7731 13.2464 16.5 11.5683 16.5 9.49821C16.5 7.71441 15.2177 6.22164 13.5 5.84288C13.2243 5.78209 12.9374 5.75 12.6428 5.75"
       stroke="black"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

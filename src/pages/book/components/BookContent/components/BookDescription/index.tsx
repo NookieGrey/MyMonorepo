@@ -21,7 +21,7 @@ export const BookDescription = ({
   return (
     <div className={styles.container}>
       <div className={styles.annotation}>
-        <Title level={3}>Аннотация</Title>
+        <Title level={3}>Описание</Title>
         <Paragraph
           ellipsis={{
             rows: 4,

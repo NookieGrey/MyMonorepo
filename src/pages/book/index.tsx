@@ -17,7 +17,8 @@ const mockBookData: BookContentProps = {
     "/mocks/mockBookImage.jpg",
   ],
   bookDescription: {
-    annotation: "Lorem ipsum dolor sit amet...",
+    annotation:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ".repeat(10),
     details: {
       author: "Стивен Хокинг",
       publisher: "Издательство АСТ",
