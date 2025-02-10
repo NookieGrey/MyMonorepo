@@ -14,7 +14,8 @@ export function BookCardComponent({ books }: Props) {
     <div className={styles.container}>
       {(books as unknown as BookDto[])?.map((book) => {
         // @ts-expect-error WIP
-        return <BookCard key={book.bookId} book={book} />;
+        const bookId = book.bookId;
+        return <BookCard book={book} key={bookId} />;
       })}
     </div>
   );

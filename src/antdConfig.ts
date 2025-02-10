@@ -12,9 +12,11 @@ export const antdThemeConfig: ThemeConfig = {
   },
   components: {
     Button: {
+      fontFamily: "Onest-Medium",
+      fontSize: 16,
       colorPrimaryHover: "#2A7FFF",
-      controlHeight: 40,
-      paddingContentHorizontal: 25,
+      controlHeight: 42,
+      borderRadius: 9,
     },
     List: {
       itemPadding: "12px",
@@ -23,12 +25,16 @@ export const antdThemeConfig: ThemeConfig = {
       colorText: "#000000",
       activeBorderColor: "rgba(42, 127, 255, 80)",
       fontFamily: "Onest-Regular",
+      fontSize: 16,
       hoverBorderColor: "transparent",
       colorBorder: "transparent",
       lineWidth: 2,
-      controlHeight: 36,
-      paddingInline: 15,
-      borderRadius: 38,
+      controlHeight: 38,
+      paddingInline: 14,
+      borderRadius: 9,
+    },
+    Form: {
+      itemMarginBottom: 0,
     },
     Dropdown: {
       paddingBlock: 6,
@@ -43,6 +49,16 @@ export const antdThemeConfig: ThemeConfig = {
       boxShadow: "0px 20px 7px rgba(42, 127, 255, 80)",
       boxShadowTertiary: "0px 2px 7px rgba(42, 127, 255, 80)",
       colorBgContainer: "#FFFFFF",
+    },
+    Drawer: {
+      footerPaddingInline: 0,
+      footerPaddingBlock: 0,
+    },
+    Collapse: {
+      headerBg: "transparent",
+      contentBg: "transparent",
+      headerPadding: "16px 0",
+      contentPadding: "0",
     },
   },
 };

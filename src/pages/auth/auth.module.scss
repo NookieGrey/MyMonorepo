@@ -1,8 +1,91 @@
+.modal {
+  height: 498px;
+  padding: 20px 20px !important;
+}
+
+.containerModal {
+  height: 100%;
+}
+
 .wrapper {
-  max-width: 1400px;
-  padding: 40px 0;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttonModal {
+  width: 36px;
+  height: 36px;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(241, 244, 246, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.buttonHide {
+  visibility: hidden;
+}
+
+.signUp {
+  display: grid;
+  grid-template-rows: 40px auto 40px;
+}
+
+.title {
+  font-family: 'Onest-Medium', sans-serif;
+  margin-bottom: 25px;
+}
+
+.container {
+  width: 284px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.buttonAuth {
+  width: 100%;
+  margin-top: 16px;
+  background: rgba(90, 156, 255, 1);
+
+  &:hover {
+    background: rgba(90, 156, 255, 1) !important;
+  }
+}
+
+.link {
+  font-family: 'Onest-Medium', sans-serif;
+  font-size: 15px;
+  margin-top: 24px;
+
+  a {
+    color: var(--ant-color-primary)
+  }
+}
+
+.containerContent {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.legalText {
+  display: flex;
+  justify-content: center;
+
+  max-width: 527px;
+  height: 100%;
+  margin-bottom: 10px;
+
+  font-family: 'Onest-Regular', sans-serif;
+  line-height: 20.4px;
+  font-size: 16px;
+  color: var(--ant-color-text-placeholder);
+  text-align: center;
 }
