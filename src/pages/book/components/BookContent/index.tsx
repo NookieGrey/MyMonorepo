@@ -1,13 +1,14 @@
 import { Typography, Layout, Space } from "antd";
 import { FavoriteButton } from "./components/FavoriteButton";
-import { ShareButton } from "./components/ShareButton";
+import { ShareDropdown } from "./components/ShareDropdown";
 import styles from "./styles.module.scss";
 import { BookGallery } from "./components/BookGallery";
 import { BookDescription } from "./components/BookDescription";
-import { BookContentProps } from "../../../../types/books";
+import { BookContentProps } from "../../../../types/book";
+import { OwnerCard } from "./components/OwnerCard";
 
 const { Title, Text } = Typography;
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 
 export const BookContent = ({
   title,
@@ -25,7 +26,7 @@ export const BookContent = ({
         </Space>
         <Space className={styles.buttonsWrapper}>
           <FavoriteButton />
-          <ShareButton />
+          <ShareDropdown />
         </Space>
       </Header>
 
@@ -34,7 +35,9 @@ export const BookContent = ({
           <BookGallery mainImage={coverImage} thumbnails={galleryImages} />
           <BookDescription {...bookDescription} />
         </Content>
-        <Sider></Sider>
+        <aside>
+          <OwnerCard />
+        </aside>
       </div>
     </section>
   );

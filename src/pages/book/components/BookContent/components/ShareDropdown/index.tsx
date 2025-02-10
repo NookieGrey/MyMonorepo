@@ -19,7 +19,7 @@ const shareMenu = {
   ],
 };
 
-export const ShareButton = () => (
+export const ShareDropdown = () => (
   <Dropdown
     menu={shareMenu}
     trigger={["click"]}

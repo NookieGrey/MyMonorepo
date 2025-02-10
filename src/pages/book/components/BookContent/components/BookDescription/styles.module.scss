@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  width: 620px;
+  max-width: 620px;
 }
 
 .annotation {
   :global(h3.ant-typography) {
     margin: 10px 0 15px;
-    font-family: "Onest", sans-serif;
+    font-family: "Onest-Regula", sans-serif;
     font-weight: 600;
     font-size: 24px;
     line-height: 31px;
@@ -16,7 +16,7 @@
   }
 
   .annotationText {
-    font-family: "Literata", serif;
+    font-family: "Literata-Regular", serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 135%;
@@ -24,7 +24,7 @@
   }
 
   .expandButton {
-    font-family: "Literata", serif;
+    font-family: "Literata-Regular", serif;
     color: var(--ant-color-primary);
     cursor: pointer;
     border: none;
@@ -41,16 +41,16 @@
 
 .detailItem {
   display: flex;
-  gap: 40px;
+  gap: 20px;
 
   :global(.ant-typography) {
-    font-family: "Onest", sans-serif;
+    font-family: "Onest-Regular", sans-serif;
     font-size: 16px;
     line-height: 20px;
   }
 
   .label {
-    width: 97px;
+    width: 120px;
     color: var(--ant-color-text-placeholder);
   }
 

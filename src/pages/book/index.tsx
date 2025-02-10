@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { BookContent } from "./components/BookContent";
 import styles from "./styles.module.scss";
-import { BookContentProps } from "../../types/books";
+import { BookContentProps } from "../../types/book";
 
 const { Content } = Layout;
 
