@@ -1,6 +1,6 @@
 import { Button, Dropdown } from "antd";
 import { ShareAltOutlined } from "@ant-design/icons";
-import styles from "./styles.module.scss";
+import styles from "./shareDropdown.module.scss";
 import {
   TelegramIcon,
   WhatsAppIcon,

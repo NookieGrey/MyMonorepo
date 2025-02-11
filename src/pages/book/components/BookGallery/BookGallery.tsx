@@ -1,5 +1,5 @@
 import { Image } from "antd";
-import styles from "./styles.module.scss";
+import styles from "./bookGallery.module.scss";
 
 interface BookGalleryProps {
   mainImage: string;

@@ -1,6 +1,6 @@
 import { Typography } from "antd";
-import styles from "./styles.module.scss";
-import { BookDescriptionProps } from "../../../../../../types/book";
+import styles from "./bookDescription.module.scss";
+import { BookDescriptionProps } from "../../../../types/book";
 
 const { Title, Paragraph, Text } = Typography;
 

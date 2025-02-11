@@ -1,8 +1,8 @@
 import { Avatar, Card, Typography, Button, Image, Divider } from "antd";
 import { EnvironmentOutlined } from "@ant-design/icons";
-import styles from "./styles.module.scss";
-import { OwnerCardProps } from "../../../../../../types/user";
-import { getMembershipTime } from "../../../../../../utils/date";
+import styles from "./ownerCard.module.scss";
+import { OwnerCardProps } from "../../../../types/user";
+import { getMembershipTime } from "../../../../utils/date";
 import { ExchangeInfoIcon } from "./svg-icons";
 
 const { Text } = Typography;

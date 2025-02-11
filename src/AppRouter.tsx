@@ -3,7 +3,7 @@ import { Home } from "./pages/home/Home.tsx";
 import { HeaderComponent } from "./components/Header";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
-import { BookPage } from "./pages/book/index.tsx";
+import { BookPage } from "./pages/book";
 import { Chat } from "./pages/chat/Chat.tsx";
 import { Profile } from "./pages/profile";
 import {
