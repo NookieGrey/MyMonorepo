@@ -3,19 +3,21 @@
   flex-direction: column;
   gap: 50px;
   background: transparent;
+  width: 100%;
+  max-width: 1330px;
 }
 
 .header {
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 18px;
   background: transparent;
   padding: 0;
   height: auto;
 }
 
 .titleWrapper {
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
@@ -34,28 +36,14 @@
     font-size: 20px;
     font-weight: 500;
     font-family: "Inter-Medium", sans-serif;
-    color: var(--color-text-author);
-  }
-
-  > * {
-    line-height: 24px;
-  }
-}
-
-.buttonsWrapper {
-  justify-content: space-between;
-  flex: 1;
-
-  > * {
-    display: flex;
-    align-items: center;
-    height: 37px;
+    color: var(--ant-color-text-placeholder);
   }
 }
 
 .contentLayout {
   display: flex;
   gap: 24px;
+  justify-content: space-between;
 }
 
 .contentContainer {

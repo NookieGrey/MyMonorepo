@@ -2,7 +2,6 @@
   &:global(.ant-btn-text.ant-btn-color-default) {
     padding: 0;
     width: auto;
-    height: auto;
     background: transparent;
     display: flex;
     align-items: center;
@@ -46,13 +45,9 @@
   }
 
   :global(.ant-dropdown-menu-item) {
-    padding: 10px;
     height: 35px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    gap: 10px;
     border-radius: 6px;
-    margin: 4px;
 
     &:hover {
       background: var(--ant-button-default-bg);

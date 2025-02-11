@@ -1,10 +1,9 @@
-import { Image } from "antd";
 import styles from "./bookGallery.module.scss";
 
-interface BookGalleryProps {
+type BookGalleryProps = {
   mainImage: string;
   thumbnails: string[];
-}
+};
 
 export const BookGallery = ({ mainImage, thumbnails }: BookGalleryProps) => {
   const visibleThumbnails = thumbnails.slice(0, 4);
@@ -12,24 +11,15 @@ export const BookGallery = ({ mainImage, thumbnails }: BookGalleryProps) => {
 
   return (
     <div className={styles.galleryContainer}>
-      <Image
-        width={315}
-        className={styles.mainImage}
-        preview={false}
-        src={mainImage}
-        alt="Обложка книги"
-      />
+      <img className={styles.mainImage} src={mainImage} alt="Обложка книги" />
 
       <div className={styles.thumbnailsContainer}>
         {visibleThumbnails.map((thumbnail, index) => (
           <div key={index} className={styles.relative}>
-            <Image
-              width={72}
-              height={72}
+            <img
               className={styles.thumbnailImage}
-              preview={false}
               src={thumbnail}
-              alt={`Изображение книги ${index + 1}`}
+              alt={"Изображение книги"}
             />
             {index === 3 && additionalCount > 0 && (
               <div className={styles.overlay}>

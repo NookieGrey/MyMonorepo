@@ -1,9 +1,10 @@
-import { Avatar, Card, Typography, Button, Image, Divider } from "antd";
+import { Avatar, Card, Typography, Button, Divider } from "antd";
 import { EnvironmentOutlined } from "@ant-design/icons";
 import styles from "./ownerCard.module.scss";
 import { OwnerCardProps } from "../../../../types/user";
 import { getMembershipTime } from "../../../../utils/date";
 import { ExchangeInfoIcon } from "./svg-icons";
+import cn from "classnames";
 
 const { Text } = Typography;
 
@@ -41,15 +42,9 @@ export const OwnerCard = () => {
         </div>
       </div>
 
-      <div className={`${styles.detailsRow} ${styles.statsRow}`}>
+      <div className={cn(styles.detailsRow, styles.statsRow)}>
         <div className={styles.iconWrapper}>
-          <Image
-            src="/statsIcon.png"
-            preview={false}
-            width={24}
-            height={24}
-            className={styles.statsIcon}
-          />
+          <img src="/statsIcon.png" className={styles.statsIcon} />
         </div>
         <Text className={styles.statsText}>
           Отдано {booksGiven} книг • Обменяно {booksExchanged}

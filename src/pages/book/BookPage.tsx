@@ -1,15 +1,12 @@
-import { Layout } from "antd";
 import { BookContent } from "./components/BookContent";
 import styles from "./bookPage.module.scss";
 import { BookContentProps } from "../../types/book";
 
-const { Content } = Layout;
-
 const mockBookData: BookContentProps = {
   title: "Краткие ответы на большие вопросы",
   author: "Стивен Хокинг",
-  coverImage: "/mocks/mockBookImage.jpg",
-  galleryImages: [
+  mainImage: "/mocks/mockBookImage.jpg",
+  thumbnails: [
     "/mocks/mockBookImage.jpg",
     "/mocks/mockBookImage.jpg",
     "/mocks/mockBookImage.jpg",
@@ -33,9 +30,8 @@ const mockBookData: BookContentProps = {
 
 export const BookPage = () => {
   return (
-    <Content className={styles.content}>
+    <div className={styles.content}>
       <BookContent {...mockBookData} />
-      <div>See Also Section Placeholder</div>
-    </Content>
+    </div>
   );
 };

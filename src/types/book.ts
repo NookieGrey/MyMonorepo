@@ -14,7 +14,7 @@ export type BookDescriptionProps = {
 export type BookContentProps = {
   title: string;
   author: string;
-  coverImage: string;
-  galleryImages: string[];
+  mainImage: string;
+  thumbnails: string[];
   bookDescription: BookDescriptionProps;
 };

@@ -61,30 +61,18 @@ export const EmailIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <g clipPath="url(#clip0_537_567)">
-      <path
-        d="M6.41675 8.75L11.0001 11.9583L15.5834 8.75"
-        stroke="black"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M1.83325 16.0834V6.91671C1.83325 5.90418 2.65406 5.08337 3.66659 5.08337H18.3333C19.3458 5.08337 20.1666 5.90418 20.1666 6.91671V16.0834C20.1666 17.0959 19.3458 17.9167 18.3333 17.9167H3.66659C2.65406 17.9167 1.83325 17.0959 1.83325 16.0834Z"
-        stroke="black"
-        strokeWidth="1.5"
-      />
-    </g>
-    <defs>
-      <clipPath id="clip0_537_567">
-        <rect
-          width="18"
-          height="18"
-          fill="white"
-          transform="translate(0 0.5)"
-        />
-      </clipPath>
-    </defs>
+    <path
+      d="M5.25 7.25L9 9.875L12.75 7.25"
+      stroke="black"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M1.5 13.25V5.75C1.5 4.92157 2.17157 4.25 3 4.25H15C15.8284 4.25 16.5 4.92157 16.5 5.75V13.25C16.5 14.0784 15.8284 14.75 15 14.75H3C2.17157 14.75 1.5 14.0784 1.5 13.25Z"
+      stroke="black"
+      strokeWidth="1.5"
+    />
   </svg>
 );
 

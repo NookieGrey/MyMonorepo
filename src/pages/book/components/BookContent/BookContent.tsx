@@ -1,5 +1,4 @@
-import { Typography, Layout, Space } from "antd";
-import { FavoriteButton } from "../FavoriteButton";
+import { Typography } from "antd";
 import { ShareDropdown } from "../ShareDropdown";
 import styles from "./bookContent.module.scss";
 import { BookGallery } from "../BookGallery";
@@ -8,33 +7,29 @@ import { BookContentProps } from "../../../../types/book";
 import { OwnerCard } from "../OwnerCard";
 
 const { Title, Text } = Typography;
-const { Header, Content } = Layout;
 
 export const BookContent = ({
   title,
   author,
-  coverImage,
-  galleryImages,
+  mainImage,
+  thumbnails,
   bookDescription,
 }: BookContentProps) => {
   return (
     <section className={styles.container}>
-      <Header className={styles.header}>
-        <Space className={styles.titleWrapper}>
+      <header className={styles.header}>
+        <div className={styles.titleWrapper}>
           <Title level={1}>{title}</Title>
           <Text>{author}</Text>
-        </Space>
-        <Space className={styles.buttonsWrapper}>
-          <FavoriteButton />
-          <ShareDropdown />
-        </Space>
-      </Header>
+        </div>
+        <ShareDropdown />
+      </header>
 
       <div className={styles.contentLayout}>
-        <Content className={styles.contentContainer}>
-          <BookGallery mainImage={coverImage} thumbnails={galleryImages} />
+        <div className={styles.contentContainer}>
+          <BookGallery {...{ mainImage, thumbnails }} />
           <BookDescription {...bookDescription} />
-        </Content>
+        </div>
         <aside>
           <OwnerCard />
         </aside>

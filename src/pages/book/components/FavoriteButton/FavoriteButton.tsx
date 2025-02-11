@@ -11,7 +11,7 @@ export const FavoriteButton = () => {
       type="text"
       className={styles.favoriteButton}
       icon={isFavorite ? <HeartFilled /> : <HeartOutlined />}
-      onClick={() => setIsFavorite(!isFavorite)}
+      onClick={() => setIsFavorite((isFavorite) => !isFavorite)}
     />
   );
 };

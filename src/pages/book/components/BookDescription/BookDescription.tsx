@@ -8,18 +8,20 @@ export const BookDescription = ({
   annotation,
   details,
 }: BookDescriptionProps) => {
+  const { author, publisher, year, binding, pages, genre, language } = details;
+
   const bookDetails = [
-    { label: "Автор", value: details.author },
-    { label: "Издательство", value: details.publisher },
-    { label: "Год издания", value: details.year },
-    { label: "Переплёт", value: details.binding },
-    { label: "Страниц", value: details.pages },
-    { label: "Жанр", value: details.genre },
-    { label: "Язык книги", value: details.language },
+    { label: "Автор", value: author },
+    { label: "Издательство", value: publisher },
+    { label: "Год издания", value: year },
+    { label: "Переплёт", value: binding },
+    { label: "Страниц", value: pages },
+    { label: "Жанр", value: genre },
+    { label: "Язык книги", value: language },
   ];
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <div className={styles.annotation}>
         <Title level={3}>Описание</Title>
         <Paragraph
@@ -36,14 +38,14 @@ export const BookDescription = ({
         </Paragraph>
       </div>
 
-      <div className={styles.details}>
+      <ul className={styles.details}>
         {bookDetails.map(({ label, value }) => (
-          <div key={label} className={styles.detailItem}>
+          <li key={label} className={styles.detailItem}>
             <Text className={styles.label}>{label}</Text>
             <Text className={styles.value}>{value}</Text>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </main>
   );
 };
