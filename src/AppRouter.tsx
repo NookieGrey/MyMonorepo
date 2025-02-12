@@ -3,6 +3,7 @@ import { Home } from "./pages/home/Home.tsx";
 import { HeaderComponent } from "./components/Header";
 import { Favourites } from "./pages/favourites/Favourites.tsx";
 import { CreateBook } from "./pages/createBook";
+import { BookPage } from "./pages/book";
 import { Chat } from "./pages/chat/Chat.tsx";
 import { Profile } from "./pages/profile";
 import {
@@ -34,6 +35,7 @@ export function AppRouter({ location }: { location: string }) {
         <Route path="/search/:title?" element={<Search />} />
         <Route path="/favourites" element={<Favourites />} />
         <Route path="/createBook" element={<CreateBook />} />
+        <Route path="/book" element={<BookPage />} />
         <Route path="/chats" element={<Chat />} />
         <Route path="/profile/:userId?" element={<Profile />} />
         <Route path={"*"} element={<div>404 page not found</div>} />
