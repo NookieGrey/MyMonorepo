@@ -1,24 +1,27 @@
+import { BookImage } from "../../../../types/book";
 import styles from "./bookGallery.module.scss";
 
-type BookGalleryProps = {
-  mainImage: string;
-  thumbnails: string[];
+type Props = {
+  images: BookImage[];
 };
-
-export const BookGallery = ({ mainImage, thumbnails }: BookGalleryProps) => {
-  const visibleThumbnails = thumbnails.slice(0, 4);
-  const additionalCount = thumbnails.length > 4 ? thumbnails.length - 3 : 0;
+export const BookGallery = ({images}: Props) => {
+  const visibleThumbnails = images.slice(0, 4);
+  const additionalCount = images.length > 4 ? images.length - 3 : 0;
 
   return (
     <div className={styles.galleryContainer}>
-      <img className={styles.mainImage} src={mainImage} alt="Обложка книги" />
+      <img
+        className={styles.mainImage}
+        src={images[0].imageUrl}
+        alt="Обложка книги"
+      />
 
       <div className={styles.thumbnailsContainer}>
-        {visibleThumbnails.map((thumbnail, index) => (
-          <div key={index} className={styles.relative}>
+        {visibleThumbnails.map(({ id, imageUrl }, index) => (
+          <div key={id} className={styles.relative}>
             <img
               className={styles.thumbnailImage}
-              src={thumbnail}
+              src={imageUrl}
               alt={"Изображение книги"}
             />
             {index === 3 && additionalCount > 0 && (

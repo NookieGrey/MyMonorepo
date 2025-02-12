@@ -1,20 +1,21 @@
-export type BookDescriptionProps = {
+export type BookDetails = {
+  title: string;
   annotation: string;
-  details: {
-    author: string;
-    publisher: string;
-    year: string;
-    binding: string;
-    pages: number;
-    genre: string;
-    language: string;
-  };
+  author: string;
+  publisher: string;
+  year: string;
+  binding: string;
+  pages: number;
+  genre: string;
+  language: string;
 };
 
-export type BookContentProps = {
-  title: string;
-  author: string;
-  mainImage: string;
-  thumbnails: string[];
-  bookDescription: BookDescriptionProps;
+export type BookImage = {
+  id: number;
+  imageUrl: string;
+};
+
+export type BookData = {
+  images: BookImage[];
+  bookDetails: BookDetails;
 };

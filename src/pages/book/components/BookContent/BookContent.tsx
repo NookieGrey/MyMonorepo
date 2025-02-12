@@ -3,32 +3,46 @@ import { ShareDropdown } from "../ShareDropdown";
 import styles from "./bookContent.module.scss";
 import { BookGallery } from "../BookGallery";
 import { BookDescription } from "../BookDescription";
-import { BookContentProps } from "../../../../types/book";
+import { BookData } from "../../../../types/book";
 import { OwnerCard } from "../OwnerCard";
 
 const { Title, Text } = Typography;
 
-export const BookContent = ({
-  title,
-  author,
-  mainImage,
-  thumbnails,
-  bookDescription,
-}: BookContentProps) => {
+const mockBookData: BookData = {
+  images: new Array(6)
+    .fill("")
+    .map((_, id) => ({ id, imageUrl: "/mocks/mockBookImage.jpg" })),
+  bookDetails: {
+    title: "Краткие ответы на большие вопросы",
+    annotation:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ".repeat(10),
+    author: "Стивен Хокинг",
+    publisher: "Издательство АСТ",
+    year: "2022",
+    binding: "Жесткий",
+    pages: 213,
+    genre: "Научный",
+    language: "Русский",
+  },
+};
+
+export const BookContent = () => {
+  const { images, bookDetails } = mockBookData;
+
   return (
     <section className={styles.container}>
       <header className={styles.header}>
         <div className={styles.titleWrapper}>
-          <Title level={1}>{title}</Title>
-          <Text>{author}</Text>
+          <Title level={1}>{bookDetails.title}</Title>
+          <Text>{bookDetails.author}</Text>
         </div>
         <ShareDropdown />
       </header>
 
       <div className={styles.contentLayout}>
         <div className={styles.contentContainer}>
-          <BookGallery {...{ mainImage, thumbnails }} />
-          <BookDescription {...bookDescription} />
+          <BookGallery images={images} />
+          <BookDescription bookDetails={bookDetails} />
         </div>
         <aside>
           <OwnerCard />
