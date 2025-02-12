@@ -6,7 +6,6 @@ import cn from "classnames";
 
 export const FavoriteButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);
-  console.log(isFavorite);
 
   return (
     <Button
