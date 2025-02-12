@@ -5,6 +5,7 @@ import { BookGallery } from "../BookGallery";
 import { BookDescription } from "../BookDescription";
 import { BookData } from "../../../../types/book";
 import { OwnerCard } from "../OwnerCard";
+import { FavoriteButton } from "../FavoriteButton";
 
 const { Title, Text } = Typography;
 
@@ -41,6 +42,9 @@ export const BookContent = () => {
 
       <div className={styles.contentLayout}>
         <div className={styles.contentContainer}>
+          <div className={styles.favoriteButtonWrapper}>
+            <FavoriteButton />
+          </div>
           <BookGallery images={images} />
           <BookDescription bookDetails={bookDetails} />
         </div>

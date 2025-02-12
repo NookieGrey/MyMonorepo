@@ -1,8 +1,6 @@
 .favoriteButton {
-  margin-top: 4px;
-
   &:global(.ant-btn-text.ant-btn-color-default) {
-    padding: 0;
+    margin: 0;
     width: auto;
     height: auto;
     background: transparent;
@@ -12,25 +10,23 @@
     &:active {
       background: transparent;
     }
-  }
 
-  :global(.anticon) {
-    svg {
-      width: 20px;
-      height: 20px;
-      fill: var(--ant-button-default-color);
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &:active {
+      transform: scale(1.1);
     }
   }
 
-  &:hover :global(.anticon) svg {
-    fill: var(--ant-color-primary-hover);
+  :global(.anticon) svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--ant-color-text-placeholder);
   }
 
-  &:active :global(.anticon) svg {
-    fill: var(--ant-button-default-active-color);
-  }
-
-  :global(.anticon-heart-filled) svg {
-    fill: var(--ant-color-primary-hover);
+  &.isFavorite :global(.anticon) svg {
+    fill: var(--ant-color-primary);
   }
 }

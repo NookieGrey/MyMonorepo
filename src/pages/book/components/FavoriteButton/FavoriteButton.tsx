@@ -1,16 +1,18 @@
 import { Button } from "antd";
-import { HeartOutlined, HeartFilled } from "@ant-design/icons";
+import { HeartFilled } from "@ant-design/icons";
 import { useState } from "react";
 import styles from "./favoriteButton.module.scss";
+import cn from "classnames";
 
 export const FavoriteButton = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+  console.log(isFavorite);
 
   return (
     <Button
       type="text"
-      className={styles.favoriteButton}
-      icon={isFavorite ? <HeartFilled /> : <HeartOutlined />}
+      className={cn(styles.favoriteButton, isFavorite && styles.isFavorite)}
+      icon={<HeartFilled />}
       onClick={() => setIsFavorite((isFavorite) => !isFavorite)}
     />
   );
